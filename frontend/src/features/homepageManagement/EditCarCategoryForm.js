@@ -129,7 +129,6 @@ const EditCarCategoryForm = ({ car, users }) => {
     //const validTypeClass = !type ? "form__input--incomplete" : ''
     //const validCarCategoryClass = !carCategory ? "form__input--incomplete" : ''
 
-    
 
     const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
