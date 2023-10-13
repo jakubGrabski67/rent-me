@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useGetReservationsQuery, useUpdateReservationMutation } from '../reservation/reservationApiSlice';
+import { useGetReservationsQuery /*, useUpdateReservationMutation*/ } from '../reservation/reservationApiSlice';
 import { selectAllUsers } from '../users/usersApiSlice';
 import EditReservationForm from '../reservation/EditReservationForm';
 
@@ -8,7 +8,7 @@ const EditReservation = () => {
   const { id } = useParams();
 
   // useGetCarsQuery hook automatycznie wykonuje zapytanie do API
-  const { data: reservations, isSuccess: isReservationsSuccess, refetch } = useGetReservationsQuery();
+  const { data: reservations, isSuccess: isReservationsSuccess/*, refetch*/ } = useGetReservationsQuery();
 
   // Wykonaj zapytanie o użytkowników w sposób, w jaki to już robisz
   const users = useSelector(selectAllUsers);

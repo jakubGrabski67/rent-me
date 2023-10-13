@@ -21,7 +21,6 @@ import DashboardSettings from './components/Dashboard/DashboardPages/DashboardSe
 import DashboardSellCar from './components/Dashboard/DashboardPages/DashboardSellCar'
 // import DashboardFlota from './components/Dashboard/DashboardPages/DashboardFlota'
 import DashboardCustomers from './components/Dashboard/DashboardPages/DashboardCustomers'
-import DashboardReservations from './components/Dashboard/DashboardPages/DashboardReservations'
 import DashboardDocumentation from './components/Dashboard/DashboardPages/DashboardDocumentation'
 import Shop from './components/HomepagePages/Shop';
 // import NewCarForm from './features/cars/NewCarForm';
@@ -91,6 +90,7 @@ import EditCarCategory from './features/homepageManagement/EditCarCategory';
             </Route>
 
             <Route path="dashboard/homepageManagement">
+              
               <Route index element={<DashboardHomepageManagement />} />
               <Route path=":id" element={<EditCarCategory/>}/>
             </Route>
@@ -109,7 +109,6 @@ import EditCarCategory from './features/homepageManagement/EditCarCategory';
               <Route path="/dash/dashboard/settings" element={<DashboardSettings />} />
               {/* <Route path="/dash/dashboard/flota" element={<DashboardFlota />} /> */}
               <Route path="/dash/dashboard/customers" element={<DashboardCustomers />} />
-              <Route path="/dash/dashboard/reservations" element={<DashboardReservations />} />
               <Route path="/dash/dashboard/homepageManagement" element={<DashboardHomepageManagement />} />
               <Route path="/dash/dashboard/documentation" element={<DashboardDocumentation />} />
             

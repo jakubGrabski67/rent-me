@@ -1,14 +1,9 @@
 import React from "react";
-
 import { NavLink, useLocation } from "react-router-dom";
 import "./HomepageHeader.css";
-
 import { Row } from "reactstrap";
 import { motion } from "framer-motion";
-
 import logo from "../../assets/images/logo.jpg";
-import userIcon from "../../assets/images/user-icon.png";
-
 import { SocialIcon } from "react-social-icons";
 
 const whileTap = {
@@ -103,11 +98,7 @@ const HomepageHeader = () => {
             </motion.div>
           </div>
 
-          {/* <div className="mobile__menu">
-            <span>
-              <i class="ri-menu-line"></i>
-            </span>
-          </div> */}
+          
         </div>
       </Row>
     </div>

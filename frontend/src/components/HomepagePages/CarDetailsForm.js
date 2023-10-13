@@ -42,7 +42,7 @@ const CarDetailsForm = ({ car }) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [promoCode, setPromoCode] = useState("Brak");
-  const [reservationStatus, setReservationStatus] = useState("Oczekuje na potwierdzenie");
+  const [reservationStatus/*, setReservationStatus*/] = useState("Oczekuje na potwierdzenie");
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -243,8 +243,7 @@ const CarDetailsForm = ({ car }) => {
   const onPhoneNumberChanged = (e) => setPhoneNumber(e.target.value);
 
   const onPromoCodeChanged = (e) => setPromoCode(e.target.value);
-  const onReservationStatusChanged = (e) =>
-  setReservationStatus(e.target.value);
+  //const onReservationStatusChanged = (e) => setReservationStatus(e.target.value);
   
 
   const canSave =

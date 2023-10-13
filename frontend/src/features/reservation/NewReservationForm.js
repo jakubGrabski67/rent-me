@@ -91,10 +91,10 @@ const NewReservationForm = ({ users }) => {
     }, [isSuccess, navigate])
 
   const onCarChanged = (e) => setCar(e.target.value);
-  const onStartDateChanged = (e) => setStartDate(e.target.value);
-  const onEndDateChanged = (e) => setEndDate(e.target.value);
+  //const onStartDateChanged = (e) => setStartDate(e.target.value);
+ // const onEndDateChanged = (e) => setEndDate(e.target.value);
   const onProtectionPackageChanged = (e) => setProtectionPackage(e.target.value);
-  const onSelectedOptionsChanged = (e) => setSelectedOptions(e.target.value);
+  //const onSelectedOptionsChanged = (e) => setSelectedOptions(e.target.value);
   const onSelectedPaymentOptionChanged = (e) => setSelectedPaymentOption(e.target.value);
   const onFirstNameChanged = (e) => setFirstName(e.target.value);
   const onLastNameChanged = (e) => setLastName(e.target.value);
@@ -179,10 +179,10 @@ const NewReservationForm = ({ users }) => {
 
     const errClass = isError ? "errmsg" : "offscreen"
     const validCarClass = !car ? "form__input--incomplete" : "";
-    const validStartDateClass = !startDate ? "form__input--incomplete" : "";
-    const validEndDateClass = !endDate ? "form__input--incomplete" : "";
+    //const validStartDateClass = !startDate ? "form__input--incomplete" : "";
+    //const validEndDateClass = !endDate ? "form__input--incomplete" : "";
     const validProtectionPackageClass = !protectionPackage ? "form__input--incomplete" : "";
-    const validSelectedOptionsClass = !selectedOptions ? "form__input--incomplete" : "";
+    //const validSelectedOptionsClass = !selectedOptions ? "form__input--incomplete" : "";
     const validSelectedPaymentOptionClass = !selectedPaymentOption ? "form__input--incomplete" : "";
     const validFirstNameClass = !firstName ? "form__input--incomplete" : "";
     const validLastNameClass = !lastName ? "form__input--incomplete" : "";

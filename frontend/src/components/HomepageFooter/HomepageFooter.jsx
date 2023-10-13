@@ -94,7 +94,7 @@ const HomepageFooter = () => {
               <h4 className="quick__links-title">Kontakt</h4>
               <ListGroup className='footer__contact'>
                 <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-2'>
-                  <span><i class="ri-map-pin-line"></i></span>
+                  <span><i className="ri-map-pin-line"></i></span>
                   <p>ul. Świętej Jadwigi 22, 42-226, Częstochowa, Poland</p>
                 </ListGroupItem>
 
@@ -105,7 +105,7 @@ const HomepageFooter = () => {
                 </ListGroupItem>
 
                 <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-2'>
-                <span><i class="ri-phone-line"></i></span>
+                <span><i className="ri-phone-line"></i></span>
                   <p>+48 123 222 111</p>
                 </ListGroupItem>
 
@@ -116,14 +116,14 @@ const HomepageFooter = () => {
                 </ListGroupItem>
 
                 <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-2'>
-                <span><i class="ri-phone-line"></i></span>
+                <span><i className="ri-phone-line"></i></span>
                   <p>+48 333 111 252</p>
                 </ListGroupItem>
 
 
 
                 <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-2'>
-                <span><i class="ri-mail-line"></i></span>
+                <span><i className="ri-mail-line"></i></span>
                   <p>kontakt@rentme.pl</p>
                 </ListGroupItem>
 

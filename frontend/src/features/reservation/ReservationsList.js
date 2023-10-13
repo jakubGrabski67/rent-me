@@ -165,9 +165,9 @@ const ReservationsList = () => {
         )
       ),
     ];
-    const startDateOptions = [
-      ...new Set(ids.map((reservationId) => entities[reservationId].startDate)),
-    ];
+    // const startDateOptions = [
+    //   ...new Set(ids.map((reservationId) => entities[reservationId].startDate)),
+    // ];
 
     content = (
       <>

@@ -8,7 +8,7 @@ const CarDetails = () => {
   const { id } = useParams();
 
   // useGetCarsQuery hook automatycznie wykonuje zapytanie do API
-  const { data: cars, isSuccess: isCarsSuccess, refetch } = useGetCarsQuery();
+  const { data: cars, isSuccess: isCarsSuccess/*, refetch*/ } = useGetCarsQuery();
 
   // Wykonaj zapytanie o użytkowników w sposób, w jaki to już robisz
   const users = useSelector(selectAllUsers);

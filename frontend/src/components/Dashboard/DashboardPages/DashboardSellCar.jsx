@@ -53,7 +53,7 @@ const DashboardSellCar = () => {
 
                 <h6 className="market__price">Cena rynkowa wynosi: $16,244</h6>
                 <span className="arrow__key">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </span>
               </div>
 
@@ -75,7 +75,7 @@ const DashboardSellCar = () => {
 
               <div className="box__03">
                 <span className="model__spend-icon">
-                  <i class="ri-car-line"></i>
+                  <i className="ri-car-line"></i>
                 </span>
                 <h6 className="spend__amount">$1174</h6>
                 <p className="spend__title">Model Spend</p>
@@ -83,7 +83,7 @@ const DashboardSellCar = () => {
 
               <div className="box__04">
                 <span className="model__spend-icon">
-                  <i class="ri-share-forward-line"></i>
+                  <i className="ri-share-forward-line"></i>
                 </span>
                 <h6 className="spend__amount">$1174</h6>
                 <p className="spend__title">Model Spend</p>
@@ -91,7 +91,7 @@ const DashboardSellCar = () => {
 
               <div className="box__05">
                 <span className="model__spend-icon">
-                  <i class="ri-money-dollar-circle-line"></i>
+                  <i className="ri-money-dollar-circle-line"></i>
                 </span>
                 <h6 className="spend__amount">$811</h6>
                 <p className="spend__title">Spend Per Unit Turned</p>
@@ -106,7 +106,7 @@ const DashboardSellCar = () => {
 
                 <h6 className="market__price">Cena rynkowa wynosi: $11,244</h6>
                 <span className="arrow__key">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </span>
               </div>
 
@@ -128,7 +128,7 @@ const DashboardSellCar = () => {
 
               <div className="box__03">
                 <span className="model__spend-icon">
-                  <i class="ri-car-line"></i>
+                  <i className="ri-car-line"></i>
                 </span>
                 <h6 className="spend__amount">$1174</h6>
                 <p className="spend__title">Model Spend</p>
@@ -136,7 +136,7 @@ const DashboardSellCar = () => {
 
               <div className="box__04">
                 <span className="model__spend-icon">
-                  <i class="ri-share-forward-line"></i>
+                  <i className="ri-share-forward-line"></i>
                 </span>
                 <h6 className="spend__amount">$1174</h6>
                 <p className="spend__title">Model Spend</p>
@@ -144,7 +144,7 @@ const DashboardSellCar = () => {
 
               <div className="box__05">
                 <span className="model__spend-icon">
-                  <i class="ri-money-dollar-circle-line"></i>
+                  <i className="ri-money-dollar-circle-line"></i>
                 </span>
                 <h6 className="spend__amount">$811</h6>
                 <p className="spend__title">Spend Per Unit Turned</p>

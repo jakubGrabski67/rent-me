@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useGetCarsQuery, useUpdateCarMutation } from '../cars/carsApiSlice';
+import { useGetCarsQuery/*, useUpdateCarMutation*/ } from '../cars/carsApiSlice';
 import { selectAllUsers } from '../users/usersApiSlice';
 import EditCarCategoryForm from '../homepageManagement/EditCarCategoryForm';
 
@@ -9,7 +9,7 @@ const EditCarCategory = () => {
   const { id } = useParams();
 
   // useGetCarsQuery hook automatycznie wykonuje zapytanie do API
-  const { data: cars, isSuccess: isCarsSuccess, refetch } = useGetCarsQuery();
+  const { data: cars, isSuccess: isCarsSuccess/*, refetch*/ } = useGetCarsQuery();
 
   // Wykonaj zapytanie o użytkowników w sposób, w jaki to już robisz
   const users = useSelector(selectAllUsers);

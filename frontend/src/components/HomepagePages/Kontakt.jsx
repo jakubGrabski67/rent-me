@@ -3,7 +3,6 @@ import HomepageHeader from "../HomepageHeader/HomepageHeader";
 import HomepageFooter from "../HomepageFooter/HomepageFooter";
 import Helmet from "../Helmet/Helmet";
 import offer3 from "../../assets/images/offer3.avif";
-import voucher1 from "../../assets/images/voucher1.png";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 
@@ -88,12 +87,13 @@ const Kontakt = () => {
           <div className="map-container">
             {/* Mapa Google Maps */}
             <iframe
+            title="google-map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20158.32673556764!2d19.118994599602782!3d50.8350380014764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4710b69c308a74d1%3A0xd12ba81f0fe039eb!2sM1%20Cz%C4%99stochowa!5e0!3m2!1spl!2spl!4v1694909259636!5m2!1spl!2spl"
               width="790"
               height="520"
-              allowfullscreen=""
+              allowFullScreen=""
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
         </div>

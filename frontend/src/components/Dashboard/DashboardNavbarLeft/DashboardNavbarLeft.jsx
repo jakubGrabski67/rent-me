@@ -11,9 +11,9 @@ const DashboardNavbarLeft = () => {
       <div className="sidebar__top">
         <h2>
           <span>
-            <i class="ri-taxi-line"></i>
+            <i className="ri-taxi-line"></i>
           </span>{" "}
-          RENT ME!
+          Rent Me!
         </h2>
       </div>
 
@@ -39,7 +39,7 @@ const DashboardNavbarLeft = () => {
 
         <div className="sidebar__bottom">
           <span>
-            <Link to="/"> <i class="ri-logout-circle-r-line"></i> Wyloguj się </Link>
+            <Link to="/"> <i className="ri-logout-circle-r-line"></i> Wyloguj się </Link>
           </span>
         </div>
       </div>

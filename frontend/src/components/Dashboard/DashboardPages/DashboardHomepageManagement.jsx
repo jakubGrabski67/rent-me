@@ -56,50 +56,46 @@ const DashboardHomepageManagement = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [filteredIds, setFilteredIds] = useState([]);
 
-  const handleCategoryFilter = () => {
-    if (!cars) return;
-  
-    const { ids } = cars;
-    if (!ids) return;
-  
-    const filteredCars = ids.filter((carId) => {
-      const car = cars.entities[carId];
-      if (!car) return false;
-  
-      if (selectedCategory === "Brak") {
-        // Filtruj tylko rekordy, które mają "Brak" w tablicy carCategory
-        return car.carCategory && car.carCategory.includes("Brak");
-      }
-  
-      // Pozostałe filtry
-      if (selectedCategory) {
-        const selectedCategories = selectedCategory.split(",");
-  
-        // Sprawdzamy, czy samochód ma przynajmniej jedną z wybranych kategorii
-        const hasMatchingCategory = selectedCategories.some((selectedCat) => {
-          if (car.carCategory && car.carCategory.includes) {
-            return car.carCategory.includes(selectedCat.trim());
-          }
-          return false;
-        });
-  
-        if (!hasMatchingCategory) return false;
-      }
-  
-      return true;
-    });
-  
-    setFilteredIds(filteredCars);
-  };
-  
-  
-  
-
-
-
   useEffect(() => {
+    const handleCategoryFilter = () => {
+      if (!cars) return;
+  
+      const { ids } = cars;
+      if (!ids) return;
+  
+      const filteredCars = ids.filter((carId) => {
+        const car = cars.entities[carId];
+        if (!car) return false;
+  
+        if (selectedCategory === "Brak") {
+          // Filtruj tylko rekordy, które mają "Brak" w tablicy carCategory
+          return car.carCategory && car.carCategory.includes("Brak");
+        }
+  
+        // Pozostałe filtry
+        if (selectedCategory) {
+          const selectedCategories = selectedCategory.split(",");
+  
+          // Sprawdzamy, czy samochód ma przynajmniej jedną z wybranych kategorii
+          const hasMatchingCategory = selectedCategories.some((selectedCat) => {
+            if (car.carCategory && car.carCategory.includes) {
+              return car.carCategory.includes(selectedCat.trim());
+            }
+            return false;
+          });
+  
+          if (!hasMatchingCategory) return false;
+        }
+  
+        return true;
+      });
+  
+      setFilteredIds(filteredCars);
+    };
+  
     handleCategoryFilter();
   }, [selectedCategory, cars]);
+  
 
   let content;
 

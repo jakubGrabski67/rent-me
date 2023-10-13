@@ -71,7 +71,7 @@ const EditCarCategoryForm = ({ car, users }) => {
     const [images, setImages] = useState([]); // Tablica do przechowywania linków do zdjęć
     const [carCategory, setCarCategory] = useState(car.carCategory)
 
-    const [completed, setCompleted] = useState(car.completed)
+    const [completed/*, setCompleted*/] = useState(car.completed)
     const [userId, setUserId] = useState(car.user)
 
   
@@ -98,9 +98,10 @@ const EditCarCategoryForm = ({ car, users }) => {
 
     }, [isSuccess, isDelSuccess, navigate])
 
-    const onTypeChanged = e => setType(e.target.value)
-    const onCompletedChanged = e => setCompleted(prev => !prev)
-    const onUserIdChanged = e => setUserId(e.target.value)
+    //const onTypeChanged = e => setType(e.target.value)
+    //const onCompletedChanged = e => setCompleted(prev => !prev)
+    //const onUserIdChanged = e => setUserId(e.target.value)
+
     //const onCarCategoryChanged = e => setCarCategory(e.target.value)
 
     const canSave = [brand, model, type, productionYear, vehicleMileage, fuelType, gearboxType, numOfPassengers, price, hp, description, images, carCategory, userId].every(Boolean) && !isLoading
@@ -122,19 +123,19 @@ const EditCarCategoryForm = ({ car, users }) => {
     const created = new Date(car.createdAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
     const updated = new Date(car.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
 
-    const options = users.map(user => {
-        return (
-            <option
-                key={user.id}
-                value={user.id}
+    // const options = users.map(user => {
+    //     return (
+    //         <option
+    //             key={user.id}
+    //             value={user.id}
 
-            > {user.username}</option >
-        )
-    })
+    //         > {user.username}</option >
+    //     )
+    // })
 
     const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
-    const validTypeClass = !type ? "form__input--incomplete" : ''
-    const validCarCategoryClass = !carCategory ? "form__input--incomplete" : ''
+    //const validTypeClass = !type ? "form__input--incomplete" : ''
+    //const validCarCategoryClass = !carCategory ? "form__input--incomplete" : ''
 
     
 
