@@ -167,7 +167,6 @@ const EditCarCategoryForm = ({ car, users }) => {
                     </div>
                 </div>
 
-
                 <label className="form__label">Wybierz kategorię pojazdu:</label>
 <div className="checkbox-grid">
   <div className="row">
