@@ -33,11 +33,6 @@ const EditCarCategoryForm = ({ car, users }) => {
       }
     };
       
-
-
-      
-
-
     const { isManager, isAdmin } = useAuth()
 
     const [updateCar, {
