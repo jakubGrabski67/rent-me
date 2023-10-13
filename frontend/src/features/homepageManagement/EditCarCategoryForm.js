@@ -50,8 +50,6 @@ const EditCarCategoryForm = ({ car, users }) => {
 
     const navigate = useNavigate()
 
-
-
     const [brand, setBrand] = useState(car.brand)
     const [model, setModel] = useState(car.model)
     const [type, setType] = useState(car.type)
@@ -69,7 +67,6 @@ const EditCarCategoryForm = ({ car, users }) => {
     const [completed/*, setCompleted*/] = useState(car.completed)
     const [userId, setUserId] = useState(car.user)
 
-  
     
     useEffect(() => {
 
