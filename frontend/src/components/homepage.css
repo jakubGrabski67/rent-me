@@ -131,11 +131,23 @@
 
 @media (max-width: 768px) {
     .timer__count img {
-        height: 55%;
+        /* height: 55%;
         bottom: 80px;
         position: relative;
-        left: 250px;
+        margin-left: 250px;  */
+        height: 0%;
     }
+    .clock__top-content{
+        text-align: center;
+    }
+    .clock__wrapper{
+        justify-content: center;
+    }
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 }
 
 .store__btn{
@@ -153,25 +165,36 @@
     color: #0a1d37;
 } 
 
+.car__item{
+    max-height: 49vh;
+}
+
 .homepage-car-img{
-    max-height: 35vh; /* Dostosuj tę wartość do pożądanej wysokości */
-    width: auto;
+    max-height: 28vh;
+    min-height: 28vh;
+    /* width: auto; */
     
     object-fit: cover;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
 
-@media (max-width: 768px) {
-    .homepage-car-img {
-        width: 475px;
+@media (max-width: 768px){
+    .service__item{
+        margin-bottom: 20px;
     }
 }
 
-.slick-list{
+@media (max-width: 768px) {
+    .homepage-car-img {
+        /* width: 475px; */
+    }
+}
+
+/* .slick-list{
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-}
+} */
 
 .car__item{
     background-color: #d6e5fb;

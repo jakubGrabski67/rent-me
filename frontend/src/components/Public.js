@@ -47,8 +47,6 @@ const Public = () => {
     refetchOnMountOrArgChange: true,
   });
 
-
-
   if (isSuccess) {
     const { ids, entities } = cars;
 
@@ -195,10 +193,14 @@ const Public = () => {
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                   {displayedIds.length > 0 ? (
                     displayedIds
-                    .filter((carId) => {
-                      const car = entities[carId];
-                      return car && car.carCategory && car.carCategory.includes("mostPopularCars");
-                    })
+                      .filter((carId) => {
+                        const car = entities[carId];
+                        return (
+                          car &&
+                          car.carCategory &&
+                          car.carCategory.includes("mostPopularCars")
+                        );
+                      })
                       .map((carId) => (
                         <div key={carId} className="col mb-2">
                           <div className="car__item">
@@ -252,7 +254,11 @@ const Public = () => {
                     displayedIds
                       .filter((carId) => {
                         const car = entities[carId];
-                        return car && car.carCategory && car.carCategory.includes("recentlyAddedCars");
+                        return (
+                          car &&
+                          car.carCategory &&
+                          car.carCategory.includes("recentlyAddedCars")
+                        );
                       })
                       .map((carId) => (
                         <div key={carId} className="col mb-2">
@@ -279,7 +285,10 @@ const Public = () => {
                               <span className="price">
                                 {entities[carId].price} zł / dzień
                               </span>
-                              <Link to={`/shop/${carId}`} className="btn btn-primary">
+                              <Link
+                                to={`/shop/${carId}`}
+                                className="btn btn-primary"
+                              >
                                 Zobacz
                               </Link>
                             </div>
@@ -294,7 +303,6 @@ const Public = () => {
             </Container>
           </section>
 
-
           <section className="timer__count">
             <Container>
               <Row className="special__offer">
@@ -306,13 +314,16 @@ const Public = () => {
                     </h3>
                   </div>
                   <Clock />
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 1.2 }}
-                    className="buy__btn store__btn"
-                  >
-                    <Link to="/shop">Zobacz</Link>
-                  </motion.button>
+                  <div className="center-container">
+                    {/*div do mobilnej responsywności*/}
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 1.2 }}
+                      className="store__btn"
+                    >
+                      <Link to="/shop">Zobacz</Link>
+                    </motion.button>
+                  </div>
                 </Col>
                 <Col lg="6" md="6" className="text-end">
                   <img src={specialOffer} alt="" />
@@ -330,10 +341,14 @@ const Public = () => {
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                   {displayedIds.length > 0 ? (
                     displayedIds
-                    .filter((carId) => {
-                      const car = entities[carId];
-                      return car && car.carCategory && car.carCategory.includes("cityCars");
-                    })
+                      .filter((carId) => {
+                        const car = entities[carId];
+                        return (
+                          car &&
+                          car.carCategory &&
+                          car.carCategory.includes("cityCars")
+                        );
+                      })
                       .map((carId) => (
                         <div key={carId} className="col mb-2">
                           <div className="car__item">
@@ -359,7 +374,10 @@ const Public = () => {
                               <span className="price">
                                 {entities[carId].price} zł / dzień
                               </span>
-                              <Link to={`/shop/${carId}`} className="btn btn-primary">
+                              <Link
+                                to={`/shop/${carId}`}
+                                className="btn btn-primary"
+                              >
                                 Zobacz
                               </Link>
                             </div>
@@ -383,10 +401,14 @@ const Public = () => {
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                   {displayedIds.length > 0 ? (
                     displayedIds
-                    .filter((carId) => {
-                      const car = entities[carId];
-                      return car && car.carCategory && car.carCategory.includes("familyCars");
-                    })
+                      .filter((carId) => {
+                        const car = entities[carId];
+                        return (
+                          car &&
+                          car.carCategory &&
+                          car.carCategory.includes("familyCars")
+                        );
+                      })
                       .map((carId) => (
                         <div key={carId} className="col mb-2">
                           <div className="car__item">
@@ -415,7 +437,10 @@ const Public = () => {
                               <span className="price">
                                 {entities[carId].price} zł / dzień
                               </span>
-                              <Link to={`/shop/${carId}`} className="btn btn-primary">
+                              <Link
+                                to={`/shop/${carId}`}
+                                className="btn btn-primary"
+                              >
                                 Zobacz
                               </Link>
                             </div>
