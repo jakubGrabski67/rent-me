@@ -47,61 +47,7 @@ const Public = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  // useEffect(() => {
-  //   const filteredMostPopularCars = products.filter(
-  //     (item) => item.category === "MERCEDES-BENZ"
-  //   );
 
-  //   const filteredNewCars = products.filter((item) => item.category === "AUDI");
-
-  //   const filteredCityCars = products.filter((item) => item.category === "BMW");
-
-  //   const filteredFamilyCars = products.filter(
-  //     (item) => item.category === "Porsche"
-  //   );
-
-  //   setMostPopularCars(filteredMostPopularCars);
-  //   setNewCars(filteredNewCars);
-  //   setCityCars(filteredCityCars);
-  //   setFamilyCars(filteredFamilyCars);
-  // }, []);
-
-  // const [mostPopularCars, setMostPopularCars] = useState([]);
-  // const [newCars, setNewCars] = useState([]);
-  // const [cityCars, setCityCars] = useState([]);
-  // const [familyCars, setFamilyCars] = useState([]);
-
-  // const selectedFields = [
-  //   { label: "Marka", field: "brand" },
-  //   { label: "Model", field: "model" },
-  //   { label: "Cena za dzień (PLN)", field: "price" },
-  //   {
-  //     label: "Zdjęcia pojazdu",
-  //     field: "images",
-  //     format: (value) => (
-  //       <div className="car-images">
-  //         {value.map((imageUrl, index) => (
-  //           <img
-  //             key={index}
-  //             src={imageUrl}
-  //             alt={`${index + 1}`}
-  //             style={{ maxWidth: "100px" }}
-  //           />
-  //         ))}
-  //       </div>
-  //     ),
-  //   },
-  // ];
-
-  // const navigate = useNavigate();
-
-  // let content;
-
-  // if (isLoading) content = <p>Loading...</p>;
-
-  // if (isError) {
-  //   content = <p className="errmsg">{error?.data?.message}</p>;
-  // }
 
   if (isSuccess) {
     const { ids, entities } = cars;
@@ -246,10 +192,6 @@ const Public = () => {
             <h2 className="h2__services">Najpopularniejsze samochody</h2>
             <Container className="homepage-cars">
               <Row>
-                {/* <Col lg="12" className="text-center mb-5">
-        
-      </Col> */}
-
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                   {displayedIds.length > 0 ? (
                     displayedIds
@@ -305,10 +247,6 @@ const Public = () => {
             <h2 className="h2__services">Nowe samochody w ofercie</h2>
             <Container className="homepage-cars">
               <Row>
-                {/* <Col lg="12" className="text-center mb-5">
-        <h2 className="section__title">Nowe samochody w ofercie</h2>
-      </Col> */}
-
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                   {displayedIds.length > 0 ? (
                     displayedIds
@@ -356,77 +294,6 @@ const Public = () => {
             </Container>
           </section>
 
-          {/* <section className="trending__products">
-            <Container className="homepage-cars">
-              <Row>
-                <Col lg="12" className="text-center mb-5 ">
-                  <h2 className="section__title ">
-                    Najpopularniejsze samochody
-                  </h2>
-                </Col>
-
-                <div className="row row-cols-1 row-cols-md-3 g-4">
-                  {displayedIds.length > 0 ? (
-                    displayedIds.map((carId) => (
-                      <div key={carId} className="col mb-2">
-                        <div className="car__item">
-                          <Slider {...sliderSettings}>
-                            {entities[carId].images.map((image, index) => (
-                              <div key={index}>
-                                <img
-                                  className="homepage-car-img"
-                                  src={image}
-                                  alt=""
-                                />
-                              </div>
-                            ))}
-                          </Slider>
-                          <div className="p-2 car__info">
-                            <h3 className="car__name">
-                              <Link to={`/shop/${carId}`}>
-                                {entities[carId].brand}
-                              </Link>
-                            </h3>
-                            <span>{entities[carId].model}</span>
-                          </div>
-                          <div className="car__card-bottom d-flex align-items-center justify-content-between p-2">
-                            <span className="price">
-                              {entities[carId].price} zł / dzień
-                            </span>
-                            <Link to={`${carId}`} className="btn btn-primary">
-                              Zobacz
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p>Brak pojazdów dla danej kategorii.</p>
-                  )}
-                </div>
-              </Row>
-            </Container>
-          </section> */}
-
-          {/* <section className="best__sales">
-            <Container>
-              <Row>
-                <Col lg="12" className="text-center mb-5">
-                  <h2 className="section__title">Nowe pojazdy w ofercie</h2>
-                </Col>
-                <CarsList data={newCars} /> */}
-
-          {/*Nadpisujemy styl aby uzyskać odpowiedni background (bootstrap) */}
-          {/* <style>
-                  {`
-            .car__item{
-              background: #fff;
-            }
-          `}
-                </style>
-              </Row>
-            </Container>
-          </section> */}
 
           <section className="timer__count">
             <Container>
@@ -454,30 +321,12 @@ const Public = () => {
             </Container>
           </section>
 
-          {/* <section className="new__arrivals">
-            <Container>
-              <Row>
-                <Col lg="12" className="text-center mb-5">
-                  <h2 className="section__title">
-                    {" "}
-                    Najpopularniejsze samochody miejskie
-                  </h2>
-                </Col>
-                <CarsList data={cityCars} />
-              </Row>
-            </Container>
-          </section> */}
-
           <section className="trending__products">
             <h2 className="h2__services mt-5">
               Najpopularniejsze samochody miejskie
             </h2>
             <Container className="homepage-cars">
               <Row>
-                {/* <Col lg="12" className="text-center mb-5">
-        <h2 className="section__title">Najpopularniejsze samochody miejskie</h2>
-      </Col> */}
-
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                   {displayedIds.length > 0 ? (
                     displayedIds
@@ -531,10 +380,6 @@ const Public = () => {
             </h2>
             <Container className="homepage-cars">
               <Row>
-                {/* <Col lg="12" className="text-center mb-5">
-        <h2 className="section__title">Najpopularniejsze samochody rodzinne</h2>
-      </Col> */}
-
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                   {displayedIds.length > 0 ? (
                     displayedIds
@@ -584,20 +429,6 @@ const Public = () => {
               </Row>
             </Container>
           </section>
-
-          {/* <section className="popular__category">
-            <Container>
-              <Row>
-                <Col lg="12" className="text-center mb-5">
-                  <h2 className="section__title">
-                    {" "}
-                    Najpopularniejsze samochody rodzinne
-                  </h2>
-                </Col>
-                <CarsList data={familyCars} />
-              </Row>
-            </Container>
-          </section> */}
         </Helmet>
 
         {/*Importuje Footer do strony głównej*/}

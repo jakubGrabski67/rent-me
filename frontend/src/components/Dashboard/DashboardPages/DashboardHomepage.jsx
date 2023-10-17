@@ -15,13 +15,29 @@ import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 
 import Helmet from '../../Helmet/Helmet'
 
+import { useGetCarsQuery } from "../../../features/cars/carsApiSlice";
 
 
-const carObj = {
-  title: "Posiadane pojazdy",
-  totalNumber: 750,
-  icon: "ri-police-car-line",
-};
+
+const DashboardHomepage = () => {
+
+  const { data: cars, isLoading, isSuccess, isError, error } = useGetCarsQuery("carsList", {
+    pollingInterval: 15000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
+  
+  const totalRecords = isSuccess ? cars.ids.length : 0;
+  
+
+
+  
+  const carObj = {
+    title: "Posiadane pojazdy",
+    totalNumber: totalRecords,
+    icon: "ri-police-car-line",
+  };
+  
 
 const tripObj = {
   title: "Dzienne trasy",
@@ -41,45 +57,47 @@ const distanceObj = {
   icon: "ri-timer-flash-line",
 };
 
-const DashboardHomepage = () => {
+
   return (
-    <Helmet title ={'Dashboard - Panel'}>
-    <>
-    {/*Importuje NavbarLeft  do dashboardu*/}
-    <DashboardNavbar/>
-    <DashboardNavbarLeft/>
-
-    <div className="dashboard">
-      <div className="dashboard__wrapper">
-        <div className="dashboard__cards">
-          <SingleCard item={carObj} />
-          <SingleCard item={tripObj} />
-          <SingleCard item={clientObj} />
-          <SingleCard item={distanceObj} />
-        </div>
-
-        <div className="statics">
-          <div className="stats">
-            <h3 className="stats__title">Statystyki pokonanych kilometrów</h3>
-            <MileChart />
+    <Helmet title="Dashboard - Panel">
+      <>
+        <DashboardNavbar />
+        <DashboardNavbarLeft />
+  
+        <div className="dashboard">
+          <div className="dashboard__wrapper">
+            <div className="dashboard__cards">
+              <SingleCard item={carObj} />
+              <SingleCard item={tripObj} />
+              <SingleCard item={clientObj} />
+              <SingleCard item={distanceObj} />
+            </div>
+  
+            <div className="statics">
+              <div className="stats">
+                <h3 className="stats__title">Statystyki pokonanych kilometrów</h3>
+                <MileChart />
+              </div>
+  
+              <div className="stats">
+                <h3 className="stats__title">Statystyki wypożyczonych pojazdów</h3>
+                <CarStatsChart />
+              </div>
+            </div>
+  
+            <div className="recommend__cars-wrapper">
+              {recommendCarsData.map((item) => (
+                <RecommendCarCard item={item} key={item.id} />
+              ))}
+            </div>
           </div>
-
-          <div className="stats">
-            <h3 className="stats__title">Statystyki wypożyczonych pojazdów</h3>
-            <CarStatsChart />
-          </div>
         </div>
-
-        <div className="recommend__cars-wrapper">
-          {recommendCarsData.map((item) => (
-            <RecommendCarCard item={item} key={item.id} />
-          ))}
-        </div>
-      </div>
-    </div>
-    </>
+  
+       
+       
+      </>
     </Helmet>
   );
-};
+              };  
 
 export default DashboardHomepage;

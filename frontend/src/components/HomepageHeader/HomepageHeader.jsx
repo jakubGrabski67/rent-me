@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./HomepageHeader.css";
 import { Row } from "reactstrap";
 import { motion } from "framer-motion";
@@ -44,39 +44,49 @@ const nav__links = [
 
 const HomepageHeader = () => {
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Oblicz wysokość menu
+  const menuHeight = mobileMenuOpen ? "490px" : "auto";
 
   return (
-    <div className="homepageHeader">
+    <div className="homepageHeader" style={{ height: menuHeight }}>
       <Row>
         <div className="nav__wrapper">
+          <div
+            className={`menu-button ${mobileMenuOpen ? "active" : ""}`}
+            onClick={toggleMobileMenu}
+          >
+            <div className={`bar ${mobileMenuOpen ? "active" : ""}`}></div>
+            <div className={`bar ${mobileMenuOpen ? "active" : ""}`}></div>
+            <div className={`bar ${mobileMenuOpen ? "active" : ""}`}></div>
+          </div>
           <div className="logo">
             <img src={logo} alt="logo" />
-            {/* <div>
-                            <h1>Rent a car</h1>
-                            <p>Online car renting service</p>
-                        </div> */}
           </div>
-
-          <div className="navigation">
-            <ul className="menu">
+          
+          <div className={`navigation ${mobileMenuOpen ? "active" : ""}`}>
+            <ul className={`menu ${mobileMenuOpen ? "active" : ""}`}>
               {nav__links.map((item, index) => (
                 <li className="nav__item" key={index}>
-                  <NavLink
-                    to={item.path}
+                  <a
+                    href={item.path}
                     className={`nav__link ${
                       location.pathname === item.path
                         ? "active on-current-page"
                         : "not-active"
                     }`}
-                    // exact
                   >
                     {item.display}
-                  </NavLink>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
-
           <div className="nav__icons">
             <motion.div
               variants={whileTap}
@@ -97,8 +107,6 @@ const HomepageHeader = () => {
               <SocialIcon url="https://instagram.com" />
             </motion.div>
           </div>
-
-          
         </div>
       </Row>
     </div>

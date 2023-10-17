@@ -62,6 +62,7 @@ const EditCarForm = ({ car, users }) => {
     const [price, setPrice] = useState(car.price)
     const [hp, setHp] = useState(car.hp)
     const [description, setDescription] = useState(car.description)
+    const [carCategory, setCarCategory] = useState(car.carCategory)
     const [images, setImages] = useState([]); // Tablica do przechowywania linków do zdjęć
 
     const [completed, setCompleted] = useState(car.completed)
@@ -92,6 +93,7 @@ const EditCarForm = ({ car, users }) => {
             setPrice('')
             setHp('')
             setDescription('')
+            setCarCategory('')
             setImages('')
             setUserId('')
             navigate('/dash/dashboard/flota')
@@ -110,14 +112,15 @@ const EditCarForm = ({ car, users }) => {
     const onPriceChanged = e => setPrice(e.target.value)
     const onHpChanged = e => setHp(e.target.value)
     const onDescriptionChanged = e => setDescription(e.target.value)
+    const onCarCategoryChanged = e => setCarCategory(e.target.value)
     const onCompletedChanged = e => setCompleted(prev => !prev)
     const onUserIdChanged = e => setUserId(e.target.value)
 
-    const canSave = [brand, model, type, productionYear, vehicleMileage, fuelType, gearboxType, numOfPassengers, price, hp, description, images, userId].every(Boolean) && !isLoading
+    const canSave = [brand, model, type, productionYear, vehicleMileage, fuelType, gearboxType, numOfPassengers, price, hp, description, carCategory, images, userId].every(Boolean) && !isLoading
 
     const onSaveCarClicked = async (e) => {
         if (canSave) {
-            await updateCar({ id: car.id, user: userId, brand, model, type, productionYear, vehicleMileage, fuelType, gearboxType, numOfPassengers, price, hp, description, images: images, completed })
+            await updateCar({ id: car.id, user: userId, brand, model, type, productionYear, vehicleMileage, fuelType, gearboxType, numOfPassengers, price, hp, description, carCategory, images: images, completed })
             navigate('/dash/dashboard/flota');
         }
     }

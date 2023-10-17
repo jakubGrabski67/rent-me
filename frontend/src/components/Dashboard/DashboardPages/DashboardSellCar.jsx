@@ -17,7 +17,7 @@ const DashboardSellCar = () => {
 
     <div className="sell__car">
       <div className="sell__car-wrapper">
-        <h2 className="sell__car-title">Sprzedaj pojazd</h2>
+        <h2 className="sell__car-title">Historia pojazdów</h2>
         <div className="sell__car-top">
           <div className="sell__car-img">
             <h2>2022 AUDI</h2>
@@ -32,7 +32,7 @@ const DashboardSellCar = () => {
 
         <div className="offer__wrapper">
           <div className="offer__top">
-            <h2 className="sell__car-title">Oferty</h2>
+            <h2 className="sell__car-title">Wybierz pojazd</h2>
 
             <div className="filter__widget-01">
               <select>
@@ -43,7 +43,7 @@ const DashboardSellCar = () => {
             </div>
           </div>
 
-          <div className="offer__list">
+          {/* <div className="offer__list">
             <div className="offer__item">
               <div className="box__01">
                 <h3 className="client__name">Adam Nowak</h3>
@@ -150,7 +150,7 @@ const DashboardSellCar = () => {
                 <p className="spend__title">Spend Per Unit Turned</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

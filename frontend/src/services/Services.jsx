@@ -9,7 +9,7 @@ import serviceData from '../assets/data/serviceData'
 const Services = () => {
   return (
     <section className="services">
-        <h2 className='h2__services'>Dlaczego warto wybrać naszą wypożyczalnię</h2>
+        <h2 className='h2__services'>Dlaczego warto wybrać naszą wypożyczalnię?</h2>
         <Container>
             <Row>
 

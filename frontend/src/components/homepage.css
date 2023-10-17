@@ -1,12 +1,61 @@
-
-
-
 .hero__content h2{
     color: #fff;
     font-size: 2.5rem;
     font-weight: 600;
     margin: 20px 0px;
     margin-left: 50px;
+}
+
+
+
+/* Zmiany tylko dla mniejszych ekranów */
+@media (max-width: 768px) {
+    .hero__content {
+        min-height: 333px !important; 
+        position: relative;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        min-height: 89vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+    }
+}
+
+@media (max-width: 768px) {
+    .h2__services{
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero__subtitle {
+        background: rgba(0, 0, 0, 0.6); /* Dodane tło dla tekstu i przycisku */
+        margin-bottom: 50px;
+        text-align: center;
+        padding: 10px; /* Dodane wypełnienie dla tekstu i przycisku */
+        margin-right: 50px;
+        font-size: small;
+    }
+
+.hero__content h2 {
+    background: rgba(0, 0, 0, 0.6); /* Dodane tło dla tekstu i przycisku */
+   
+    text-align: center;
+    padding: 10px; /* Dodane wypełnienie dla tekstu i przycisku */
+    margin-right: 50px;
+    font-size: small;
+    
+}
+
+.slider__btn {
+    text-align: center;
+    margin-right: 50px;
+    width: 150px;
+    margin-left: 300px !important;
+}
 }
 
 .hero__content p{
@@ -27,10 +76,8 @@
     position: relative;
     display: flex;
     align-items: center;
-   
-
-               
 }
+
 .slider__btn {
     border: none;
     outline: none;
@@ -43,14 +90,6 @@
     margin-top: 50px;
     margin-left: 50px;
 }
-
-/* .text__content {
-    position: absolute;
-    display: block !important;
-    width: 100%;
-    list-style: none;
-  } */
-
 
 .hero__section p:nth-child(1){
     font-weight: 500;
@@ -70,26 +109,33 @@
 
 .buy__btn a:hover{
     color: #fff;
-    
 }
 
 .hero__content{
     padding-top: 45px;
     min-height: 89vh;
-
-    
 }
-
 
 .timer__count{
     background: var(--primary-color);
     height: 300px;
 }
 
-.timer__count img{
-    width: 75% !important;
-    height: 100% !important;
+.timer__count img {
+    width: 100%;
+    height: auto;
+    max-height: 70%;
     object-fit: contain;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .timer__count img {
+        height: 55%;
+        bottom: 80px;
+        position: relative;
+        left: 250px;
+    }
 }
 
 .store__btn{
@@ -108,23 +154,29 @@
 } 
 
 .homepage-car-img{
-    min-height: 35vh;
+    max-height: 35vh; /* Dostosuj tę wartość do pożądanej wysokości */
+    width: auto;
+    
+    object-fit: cover;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
-/* .homepage-cars{
-     min-width: 180vh; 
-} */
+@media (max-width: 768px) {
+    .homepage-car-img {
+        width: 475px;
+    }
+}
+
+.slick-list{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
 
 .car__item{
     background-color: #d6e5fb;
-    
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
-}
-
-.homepage-car-img{
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
 }
 
 .price{

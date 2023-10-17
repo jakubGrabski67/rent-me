@@ -18,7 +18,7 @@ import useAuth from '../hooks/useAuth'
 const DASH_REGEX = /^\/dash(\/)?$/
 const NOTES_REGEX = /^\/dash\/notes(\/)?$/
 const CARS_REGEX = /^\/dash\/dashboard\/flota(\/)?$/
-const RESERVATIONS_REGEX = /^\/dash\/dashboard\/reservation(\/)?$/
+const RESERVATIONS_REGEX = /^\/dash\/dashboard\/reservations(\/)?$/
 const USERS_REGEX = /^\/dash\/users(\/)?$/
 
 const DashHeader = () => {

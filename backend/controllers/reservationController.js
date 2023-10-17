@@ -16,8 +16,8 @@ const getAllReservations = asyncHandler(async (req, res) => {
   res.json(reservations);
 });
 
-// @desc Create new car
-// @route POST /cars
+// @desc Create new reservation
+// @route POST /reservation
 // @access Private
 const createNewReservation = asyncHandler(async (req, res) => {
   const {  car,
@@ -45,15 +45,9 @@ const createNewReservation = asyncHandler(async (req, res) => {
       return res.status(400).json({ message: 'Wszystkie pola są wymagane!' })
   }
 
-  // Check for duplicate brand
-  // const duplicate = await Car.findOne({ brand }).lean().exec()
-
-  // if (duplicate) {
-  //     return res.status(409).json({ message: 'Duplicate car brand' })
-  // }
-
-  // Create and store the new user 
-  const reservation = await Reservation.create({ car,
+  // Create and store the new reservation
+  const reservation = await Reservation.create({ 
+    car,
     startDate,
     endDate,
     protectionPackage,
@@ -73,7 +67,7 @@ const createNewReservation = asyncHandler(async (req, res) => {
     reservationStatus })
 
   if (reservation) { // Created 
-      return res.status(201).json({ message: 'Pomyślnie dodano nowy pojazd!' })
+      return res.status(201).json({ message: 'Pomyślnie dodano nową rezerwację!' })
   } else {
       return res.status(400).json({ message: 'Otrzymano nieprawidłowe dane!' })
   }

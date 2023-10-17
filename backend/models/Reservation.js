@@ -2,15 +2,10 @@ const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   ref: 'Customer',
-    // },
     car: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'Car', // Zmień na odpowiednią nazwę modelu pojazdu
+      ref: 'Car',
     },
     startDate: {
       type: Date,
