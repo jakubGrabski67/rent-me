@@ -884,7 +884,6 @@ const CarDetailsForm = ({ car }) => {
           </Modal.Footer>
         </div>
       </Modal>
-
       <HomepageFooter />
     </>
   );
