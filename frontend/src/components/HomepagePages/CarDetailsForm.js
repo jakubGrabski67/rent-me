@@ -880,7 +880,6 @@ const CarDetailsForm = ({ car }) => {
               >
                 Zarezerwuj
               </button>
-            
           </Modal.Footer>
         </div>
       </Modal>
