@@ -7,8 +7,7 @@ import "./DashboardNavbarLeft.css";
 
 const DashboardNavbarLeft = () => {
 
-  const [sendLogout, {
-}] = useSendLogoutMutation()
+  const [sendLogout] = useSendLogoutMutation()
 
   return (
     <div className="sidebar">

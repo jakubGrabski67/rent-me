@@ -112,7 +112,7 @@ const EditCarForm = ({ car, users }) => {
     const onPriceChanged = e => setPrice(e.target.value)
     const onHpChanged = e => setHp(e.target.value)
     const onDescriptionChanged = e => setDescription(e.target.value)
-    const onCarCategoryChanged = e => setCarCategory(e.target.value)
+    // const onCarCategoryChanged = e => setCarCategory(e.target.value)
     const onCompletedChanged = e => setCompleted(prev => !prev)
     const onUserIdChanged = e => setUserId(e.target.value)
 

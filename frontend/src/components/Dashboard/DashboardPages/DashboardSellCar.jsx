@@ -2,13 +2,13 @@ import React from "react";
 import sellCar from "../../../assets/images/sell-car.png";
 import "../DashboardStyles/DashboardSellCar.css";
 import TrackingChart from "../../../assets/charts/TrackingChart";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+// import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import DashboardNavbarLeft from "../DashboardNavbarLeft/DashboardNavbarLeft";
 
 const DashboardSellCar = () => {
-  const percentage = 55;
-  const percentage02 = 45;
+  // const percentage = 55;
+  // const percentage02 = 45;
   return (
     <>
     {/*Importuje DashboarNavbar i NavbarLeft do Dashboard/Renting*/}

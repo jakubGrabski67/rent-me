@@ -21,7 +21,11 @@ import { useGetCarsQuery } from "../../../features/cars/carsApiSlice";
 
 const DashboardHomepage = () => {
 
-  const { data: cars, isLoading, isSuccess, isError, error } = useGetCarsQuery("carsList", {
+  const { data: cars,
+    // isLoading,
+    isSuccess,
+    //isError,
+    /*error*/ } = useGetCarsQuery("carsList", {
     pollingInterval: 15000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,

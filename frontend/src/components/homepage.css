@@ -4,8 +4,23 @@
     font-weight: 600;
     margin: 20px 0px;
     margin-left: 50px;
+
+    background: rgba(0, 0, 0, 0.6); /* Dodane tło dla tekstu i przycisku */
+    margin-bottom: 50px;
+   
+    padding: 10px; /* Dodane wypełnienie dla tekstu i przycisku */
+    /* margin-right: 50px; */
+    width:fit-content;
 }
 
+.hero__subtitle{
+    background: rgba(0, 0, 0, 0.6); /* Dodane tło dla tekstu i przycisku */
+    margin-bottom: 50px;
+   
+    padding: 10px; /* Dodane wypełnienie dla tekstu i przycisku */
+    /* margin-right: 50px; */
+    width: fit-content;
+}
 
 
 /* Zmiany tylko dla mniejszych ekranów */
@@ -185,11 +200,11 @@
     }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .homepage-car-img {
-        /* width: 475px; */
+         width: 475px; 
     }
-}
+} */
 
 /* .slick-list{
     border-top-right-radius: 10px;
