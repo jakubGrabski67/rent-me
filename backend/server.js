@@ -11,6 +11,8 @@ const connectDB = require('./config/dbConn')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || 3500
 
+const stripe = require('./routes/stripe')
+
 console.log(process.env.NODE_ENV)
 
 connectDB()
@@ -24,6 +26,8 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/', express.static(path.join(__dirname, 'public')))
+
+app.use('/stripe', stripe)
 
 app.use('/', require('./routes/root'))
 app.use('/auth', require('./routes/authRoutes'))

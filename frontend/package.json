@@ -10,6 +10,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/react-hooks": "^7.0.0",
     "antd": "^5.8.4",
+    "axios": "^1.5.1",
     "bcrpyt": "^2.0.0",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.1",

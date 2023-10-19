@@ -40,6 +40,8 @@ import EditReservation from './features/reservation/EditReservation';
 import NewReservation from './features/reservation/NewReservation';
 import DashboardHomepageManagement from './components/Dashboard/DashboardPages/DashboardHomepageManagement'
 import EditCarCategory from './features/homepageManagement/EditCarCategory';
+import NotFound from './NotFound';
+import CheckoutSuccess from './CheckoutSuccess';
 
 
   function App() {
@@ -50,6 +52,9 @@ import EditCarCategory from './features/homepageManagement/EditCarCategory';
           <Route index element={<Public />} />
           <Route path="login" element={<Login />} />
           <Route path="shop" element={<Shop />} />
+
+          <Route path='checkout-success' element={<CheckoutSuccess/>} />
+          <Route path="*" element={<NotFound/>} />
           
           <Route path="shop">
               <Route path=":id" element={<CarDetails/>}/>

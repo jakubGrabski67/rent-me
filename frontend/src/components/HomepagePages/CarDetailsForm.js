@@ -14,6 +14,7 @@ import pl from "date-fns/locale/pl";
 
 import { useNavigate } from "react-router-dom";
 import { useAddNewReservationMutation } from "../../features/reservation/reservationApiSlice";
+import PayButton from "./PayButton";
 
 const CarDetailsForm = ({ car }) => {
   const [addNewReservation, { isLoading}] =
@@ -268,32 +269,32 @@ const CarDetailsForm = ({ car }) => {
       reservationStatus
     ].every(Boolean) && !isLoading;
 
-  const onSaveReservationClicked = async (e) => {
-    e.preventDefault();
-    if (canSave) {
-      await addNewReservation({
-        car,
-        startDate,
-        endDate,
-        protectionPackage,
-        selectedOptions,
-        selectedPaymentOption,
-        firstName,
-        lastName,
-        country,
-        city,
-        street,
-        houseNumber,
-        postalCode,
-        driverLicenseNumber,
-        email,
-        phoneNumber,
-        promoCode,
-        reservationStatus
-      });
-      navigate("/dash/dashboard/reservations");
-    }
-  };
+    const onSaveReservationClicked = async () => {
+      if (canSave) {
+        await addNewReservation({
+          car,
+          startDate,
+          endDate,
+          protectionPackage,
+          selectedOptions,
+          selectedPaymentOption,
+          firstName,
+          lastName,
+          country,
+          city,
+          street,
+          houseNumber,
+          postalCode,
+          driverLicenseNumber,
+          email,
+          phoneNumber,
+          promoCode,
+          reservationStatus
+        });
+       // navigate("/dash/dashboard/reservations");
+      }
+    };
+    
 
   // const errClass = isError ? "errmsg" : "offscreen";
   // const validCarClass = !car ? "form__input--incomplete" : "";
@@ -344,7 +345,10 @@ const CarDetailsForm = ({ car }) => {
       </div>
 
       <h2 className="faq__header">Parametry pojazdu</h2>
-
+      <PayButton
+   reservedCar={car}
+  
+  />
       <section className="section-center">
         <div className="container-fluid">
           <div className="row justify-content-center align-items-center">
@@ -356,6 +360,8 @@ const CarDetailsForm = ({ car }) => {
                     <hr className="hr__details"></hr>
                     <div className="d-flex flex-wrap justify-content-center">
 
+                    
+                    
                       <div className="col-md-2 pt-1">
                         <div className="mb-2">
                           <p className="fw-bold mb-1 text-label">Marka</p>
@@ -847,6 +853,9 @@ const CarDetailsForm = ({ car }) => {
                       <p className="final-price">
                         {roundedTotalRentalPrice} PLN
                       </p>
+
+                     
+
                     </div>
                   </div>
                 </div>
@@ -855,32 +864,27 @@ const CarDetailsForm = ({ car }) => {
           </Modal.Body>
 
           <Modal.Footer>
-            <button
-              className="btn btn-secondary"
-              onClick={() => {
-                setShowModal(false);
-                clearFormData(); // Wywołaj funkcję czyszczenia danych
-              }}
-            >
-              Anuluj rezerwację
-            </button>
+  <button
+    className="btn btn-secondary"
+    onClick={() => {
+      setShowModal(false);
+      clearFormData(); // Wywołaj funkcję czyszczenia danych
+    }}
+  >
+    Anuluj rezerwację
+  </button>
 
-            <button className="btn btn-primary" onClick={handleNextStep}>
-              {currentStep === "finalConfirmation"
-                ? "Przejdź do płatności"
-                : "Przejdź dalej"}
-            </button>
+  <button className="btn btn-primary" onClick={handleNextStep}>
+    {currentStep === "finalConfirmation"
+      ? "Przejdź do płatności"
+      : "Przejdź dalej"}
+  </button>
 
-          
-              <button
-                className="btn btn-primary"
-                onClick={onSaveReservationClicked}
-                brand="Save"
-                disabled={!canSave}
-              >
-                Zarezerwuj
-              </button>
-          </Modal.Footer>
+  <PayButton
+   reservedCar={car}
+    onReserveClick={onSaveReservationClicked}
+  />
+</Modal.Footer>
         </div>
       </Modal>
       <HomepageFooter />
