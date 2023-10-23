@@ -62,12 +62,13 @@
     padding: 10px; /* Dodane wypełnienie dla tekstu i przycisku */
     margin-right: 50px;
     font-size: small;
+    margin-bottom: 0px;
     
 }
 
 .slider__btn {
     text-align: center;
-    margin-right: 50px;
+    /* margin-right: 50px; */
     width: 150px;
     margin-left: 300px !important;
 }
@@ -163,6 +164,16 @@
         justify-content: center;
         align-items: center;
       }
+}
+
+@media (max-width: 768px) {
+    .car__item{
+        max-height: 65vh !important;
+    }
+    .homepage-car-img{
+        min-height: 50vh !important;
+        max-height: 50vh !important;
+    }
 }
 
 .store__btn{

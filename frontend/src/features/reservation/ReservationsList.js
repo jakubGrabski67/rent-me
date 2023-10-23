@@ -31,19 +31,6 @@ const ReservationsList = () => {
     return new Date(dateTime).toLocaleString(undefined, options);
   };
 
-  // const formatReservationStatus = (reservationStatus) => {
-  //   switch (reservationStatus) {
-  //     case "W trakcie":
-  //       return "wTrakcie";
-  //     case "Zakończono":
-  //       return "zakonczono";
-  //     case "Oczekuje":
-  //       return "oczekuje";
-  //     default:
-  //       return "Nieznany status";
-  //   }
-  // };
-
   const selectedFields = [
     { label: "ID rezerwacji", field: "_id" },
     {
@@ -73,9 +60,9 @@ const ReservationsList = () => {
     { label: "Opcje dodatkowe", field: "selectedOptions" },
     {
       label: "Status rezerwacji",
-      field: "reservationStatus",
-      // format: (value) => formatReservationStatus(value),
+      field: "reservationStatus", // format: (value) => formatReservationStatus(value),
     },
+
     {
       label: "Utworzono",
       field: "createdAt",
@@ -86,6 +73,7 @@ const ReservationsList = () => {
       field: "updatedAt",
       format: (value) => formatDateTime(value),
     },
+    { label: "Cena za okres wypożyczenia", field: "totalRentalPrice" },
   ];
 
   const [searchSelectedPaymentOption, setSearchSelectedPaymentOption] =
@@ -165,9 +153,6 @@ const ReservationsList = () => {
         )
       ),
     ];
-    // const startDateOptions = [
-    //   ...new Set(ids.map((reservationId) => entities[reservationId].startDate)),
-    // ];
 
     content = (
       <>
@@ -218,16 +203,12 @@ const ReservationsList = () => {
             </button>
           </div>
 
-
-          
           <div className="custom-card-container">
-
             <div className="row row-cols-1 row-cols-md-3 g-4">
               {displayedIds.length > 0 ? (
                 displayedIds.map((reservationId) => (
                   <div key={reservationId} className="col mb-3">
                     <div className="card h-100 custom-card-shift">
-              
                       <div className="card-body">
                         <div className="row">
                           <div className="col-md-6">
@@ -286,18 +267,26 @@ const ReservationsList = () => {
                                               )
                                             ),
                                           ].map((_, index) => (
-                                            <p className="field" key={index} style={{ userSelect: "none" }}>
-                                            &nbsp;
-                                          </p>
+                                            <p
+                                              className="field"
+                                              key={index}
+                                              style={{ userSelect: "none" }}
+                                            >
+                                              &nbsp;
+                                            </p>
                                           ))}
                                         </>
                                       ) : (
                                         <>
                                           <p className="field">Brak</p>
                                           {[...Array(3)].map((_, index) => (
-                                            <p className="field" key={index} style={{ userSelect: "none" }}>
-                                            &nbsp;
-                                          </p>
+                                            <p
+                                              className="field"
+                                              key={index}
+                                              style={{ userSelect: "none" }}
+                                            >
+                                              &nbsp;
+                                            </p>
                                           ))}
                                         </>
                                       )}
@@ -315,29 +304,21 @@ const ReservationsList = () => {
                               ))}
                             </div>
                           </div>
-
-                          {/* <div className="col-md-12 text-center">
-                            <div className="text-center mt-2">
-                             
-                              <div
-                                className={`description-container${
-                                  openDescriptionIds.includes(carId)
-                                    ? " open"
-                                    : ""
-                                }`}
-                              >
-                                <p className="description ">
-                                  {selectedFields[12].format
-                                    ? selectedFields[12].format(
-                                        entities[reservationId][
-                                          selectedFields[12].field
-                                        ]
+                          <div className="d-flex justify-content-between align-items-center mt-3 border">
+                            {selectedFields.slice(21, 22).map((field) => (
+                              <div key={field.field} className="mb-2">
+                                <p className="fw-bold mb-1">{field.label}</p>
+                                <p className="field text-primary fw-bold">
+                                  {field.format
+                                    ? field.format(
+                                        entities[reservationId][field.field]
                                       )
-                                    : entities[reservationId][selectedFields[12].field]}
+                                    : entities[reservationId][field.field]}{" "}
+                                  PLN
                                 </p>
                               </div>
-                            </div>
-                          </div> */}
+                            ))}
+                          </div>
                         </div>
 
                         <div className="d-flex justify-content-between align-items-center mt-3">
@@ -374,24 +355,6 @@ const ReservationsList = () => {
             </div>
           </div>
         </div>
-
-        {/* <Modal
-          show={selectedImage !== null}
-          onHide={closeModal}
-          centered
-          dialogClassName="modal-dialog-centered"
-          contentClassName="modal-content-image"
-        >
-          <Modal.Body className="modal-body">
-            {selectedImage && (
-              <img
-                src={selectedImage}
-                alt="Selected"
-                className="img-fluid modal-image"
-              />
-            )}
-          </Modal.Body>
-        </Modal> */}
       </>
     );
   }

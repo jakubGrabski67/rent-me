@@ -75,6 +75,9 @@ const reservationSchema = new mongoose.Schema(
       type: String,
       default: false
   },
+  totalRentalPrice: {
+    type: Number,
+  },
   },
   {
     timestamps: true,

@@ -67,7 +67,7 @@ const Shop = () => {
     { label: "Model", field: "model" },
     { label: "Skrzynia biegów", field: "gearboxType" },
     { label: "Moc (KM)", field: "hp" },
-    { label: "Przebieg pojazdu", field: "vehicleMileage" },
+    { label: "Przebieg pojazdu (km)", field: "vehicleMileage" },
     { label: "Cena za dzień (PLN)", field: "price" },
     { label: "Opis pojazdu", field: "description" },
     {

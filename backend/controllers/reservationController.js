@@ -37,11 +37,12 @@ const createNewReservation = asyncHandler(async (req, res) => {
     email,
     phoneNumber,
     promoCode,
-    reservationStatus} = req.body
+    reservationStatus,
+    totalRentalPrice} = req.body
 
   // Confirm data
   if (!car || !startDate || !endDate || !protectionPackage || !selectedOptions || !selectedPaymentOption || !firstName || !lastName || !country || !city
-     || !street || !houseNumber || !postalCode || !driverLicenseNumber || !email || !phoneNumber || !promoCode || !reservationStatus) {
+     || !street || !houseNumber || !postalCode || !driverLicenseNumber || !email || !phoneNumber || !promoCode || !reservationStatus || !totalRentalPrice) {
       return res.status(400).json({ message: 'Wszystkie pola są wymagane!' })
   }
 
@@ -64,7 +65,8 @@ const createNewReservation = asyncHandler(async (req, res) => {
     email,
     phoneNumber,
     promoCode,
-    reservationStatus })
+    reservationStatus,
+    totalRentalPrice })
 
   if (reservation) { // Created 
       return res.status(201).json({ message: 'Pomyślnie dodano nową rezerwację!' })
@@ -98,7 +100,8 @@ const updateReservation = asyncHandler(async (req, res) => {
     email,
     phoneNumber,
     promoCode,
-    reservationStatus
+    reservationStatus,
+    totalRentalPrice
   } = req.body;
 
   // Potwierdź dane
@@ -122,7 +125,8 @@ const updateReservation = asyncHandler(async (req, res) => {
     !driverLicenseNumber ||
     !email ||
     !phoneNumber ||
-    !reservationStatus
+    !reservationStatus ||
+    !totalRentalPrice
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -154,6 +158,7 @@ const updateReservation = asyncHandler(async (req, res) => {
   reservation.phoneNumber = phoneNumber;
   reservation.promoCode = promoCode;
   reservation.reservationStatus = reservationStatus;
+  reservation.totalRentalPrice = totalRentalPrice;
 
   const updatedReservation = await reservation.save()
 

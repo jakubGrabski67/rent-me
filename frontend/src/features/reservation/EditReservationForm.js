@@ -84,11 +84,8 @@ const EditReservationForm = ({ reservation, users }) => {
   const [email, setEmail] = useState(reservation.email);
   const [phoneNumber, setPhoneNumber] = useState(reservation.phoneNumber);
   const [promoCode, setPromoCode] = useState(reservation.promoCode);
-  //const [reservationStatus, setReservationStatus] = useState(reservation.reservationStatus)
-
-  const [reservationStatus, setReservationStatus] = useState(
-    reservation.reservationStatus
-  ); // Początkowo brak wybranej opcji
+  const [reservationStatus, setReservationStatus] = useState(reservation.reservationStatus); // Początkowo brak wybranej opcji
+  const [totalRentalPrice, setTotalRentalPrice] = useState(reservation.totalRentalPrice);
 
   useEffect(() => {
     if (isSuccess || isDelSuccess) {
@@ -110,6 +107,7 @@ const EditReservationForm = ({ reservation, users }) => {
       setPhoneNumber("");
       setPromoCode("");
       setReservationStatus("");// ???
+      setTotalRentalPrice("");
       navigate("/dash/dashboard/reservations");
     }
   }, [isSuccess, isDelSuccess, navigate]);
@@ -134,8 +132,8 @@ const EditReservationForm = ({ reservation, users }) => {
   const onEmailChanged = (e) => setEmail(e.target.value);
   const onPhoneNumberChanged = (e) => setPhoneNumber(e.target.value);
   const onPromoCodeChanged = (e) => setPromoCode(e.target.value);
-  const onReservationStatusChanged = (e) =>
-    setReservationStatus(e.target.value);
+  const onReservationStatusChanged = (e) => setReservationStatus(e.target.value);
+  const onTotalRentalPriceChanged = (e) => setTotalRentalPrice(e.target.value);
 
   const onStartDateChange = (newStartDate, setStartDate) => {
     console.log("Nowa data rozpoczęcia:", newStartDate);
@@ -166,7 +164,8 @@ const EditReservationForm = ({ reservation, users }) => {
       email,
       phoneNumber,
       promoCode,
-      reservationStatus //????
+      reservationStatus, //????
+      totalRentalPrice
     ].every(Boolean) && !isLoading;
 
   const onSaveReservationClicked = async (e) => {
@@ -191,6 +190,7 @@ const EditReservationForm = ({ reservation, users }) => {
         phoneNumber,
         promoCode,
         reservationStatus,
+        totalRentalPrice
       });
       navigate("/dash/dashboard/reservations");
     }
@@ -530,6 +530,17 @@ const EditReservationForm = ({ reservation, users }) => {
           name="promoCode"
           value={promoCode}
           onChange={onPromoCodeChanged}
+        />
+
+<label className="form__label" htmlFor="note-text">
+          Cena za okres wypożyczenia:
+        </label>
+        <textarea
+          className={`form__input form__input--title`}
+          id="totalRentalPrice"
+          name="totalRentalPrice"
+          value={totalRentalPrice}
+          onChange={onTotalRentalPriceChanged}
         />
 
         <div className="form__row">

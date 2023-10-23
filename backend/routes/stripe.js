@@ -10,13 +10,18 @@ const router = express.Router();
 router.post('/create-checkout-session', async (req, res) => {
   // Warunek sprawdzający czy reservedCar istnieje w req.body
   if (!req.body.reservedCar) {
-    //Jeśli nie istnieje to:
+    // Jeśli nie istnieje to:
     return res.status(400).json({ error: 'Invalid data of reserved car.' });
   }
 
-  const { reservedCar } = req.body;
+  const { reservedCar, startDate, endDate } = req.body;
+  const roundedTotalRentalPrice = parseFloat(req.body.roundedTotalRentalPrice);
 
-  const { _id, brand, model, images, description, price } = reservedCar;
+  if (isNaN(roundedTotalRentalPrice)) {
+    return res.status(400).json({ error: 'Invalid roundedTotalRentalPrice.' });
+  }
+  
+  const { _id, brand, model, images } = reservedCar;
 
   // Tworzenie line_items na podstawie reservedCar
   const line_items = [
@@ -24,14 +29,14 @@ router.post('/create-checkout-session', async (req, res) => {
       price_data: {
         currency: 'pln',
         product_data: {
-          name: `${brand} ${model}`, // Konkatenacja brand i model
+          name: `Płatność za wypożyczenie pojazdu: ${brand} ${model}`,
           images,
-          description,
+          description: `Data rozpoczęcia okresu wypożyczenia: ${startDate} Data zakończenia okresu wypożyczenia: ${endDate}`,
           metadata: {
             id: _id,
           },
         },
-        unit_amount: price * 100,
+        unit_amount: Math.ceil(roundedTotalRentalPrice * 100), // Zmieniona cena na obliczoną wartość
       },
       quantity: 1,
     },

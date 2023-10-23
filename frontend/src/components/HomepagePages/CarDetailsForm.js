@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,15 +12,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
 
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useAddNewReservationMutation } from "../../features/reservation/reservationApiSlice";
 import PayButton from "./PayButton";
+
 
 const CarDetailsForm = ({ car }) => {
   const [addNewReservation, { isLoading}] =
     useAddNewReservationMutation();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   registerLocale("pl", pl);
 
@@ -44,6 +45,7 @@ const CarDetailsForm = ({ car }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [promoCode, setPromoCode] = useState("Brak");
   const [reservationStatus/*, setReservationStatus*/] = useState("Oczekuje na potwierdzenie");
+
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -185,12 +187,12 @@ const CarDetailsForm = ({ car }) => {
   const hours = Math.floor(remainingMinutes / 60);
   const minutes = remainingMinutes % 60;
 
-  let totalRentalPrice =
+  let countedRentalPrice =
     days * pricePerDay +
     hours * (pricePerDay / 24) +
     minutes * (pricePerDay / (24 * 60));
 
-  const priceForDateRange = Math.ceil(totalRentalPrice);
+  const priceForDateRange = Math.ceil(countedRentalPrice);
 
   let packagePrice = 0;
   if (protectionPackage) {
@@ -199,7 +201,7 @@ const CarDetailsForm = ({ car }) => {
     );
     if (selectedPackage && selectedPackage.price !== 0) {
       packagePrice = selectedPackage.price;
-      totalRentalPrice += packagePrice;
+      countedRentalPrice += packagePrice;
     }
   }
 
@@ -208,11 +210,11 @@ const CarDetailsForm = ({ car }) => {
     const option = options.find((option) => option.name === selectedOption);
     if (option) {
       optionsPrice += option.price;
-      totalRentalPrice += option.price;
+      countedRentalPrice += option.price;
     }
   });
 
-  const roundedTotalRentalPrice = totalRentalPrice.toFixed(2);
+  const roundedTotalRentalPrice = countedRentalPrice.toFixed(2);
 
   console.log(roundedTotalRentalPrice);
 
@@ -245,7 +247,13 @@ const CarDetailsForm = ({ car }) => {
 
   const onPromoCodeChanged = (e) => setPromoCode(e.target.value);
   //const onReservationStatusChanged = (e) => setReservationStatus(e.target.value);
+  //const onTotalRentalPrice = (e) => setTotalRentalPrice(roundedTotalRentalPrice);
   
+  const [totalRentalPrice, setTotalRentalPrice] = useState("");
+
+  useEffect(() => {
+    setTotalRentalPrice(roundedTotalRentalPrice);
+  }, [roundedTotalRentalPrice]);
 
   const canSave =
     [
@@ -266,8 +274,11 @@ const CarDetailsForm = ({ car }) => {
       email,
       phoneNumber,
       promoCode,
-      reservationStatus
+      reservationStatus,
+      totalRentalPrice
     ].every(Boolean) && !isLoading;
+
+    
 
     const onSaveReservationClicked = async () => {
       if (canSave) {
@@ -289,11 +300,13 @@ const CarDetailsForm = ({ car }) => {
           email,
           phoneNumber,
           promoCode,
-          reservationStatus
+          reservationStatus,
+          totalRentalPrice, // Używamy totalRentalPrice
         });
-       // navigate("/dash/dashboard/reservations");
+        // navigate("/dash/dashboard/reservations");
       }
     };
+  
     
 
   // const errClass = isError ? "errmsg" : "offscreen";
@@ -323,32 +336,30 @@ const CarDetailsForm = ({ car }) => {
       <HomepageHeader />
 
       <div className="slider-placement">
-        <div className="slider-container">
-          <Slider {...sliderSettings}>
-            {car.images.map((image, index) => (
-              <div key={index} className="slider-slide">
-                <div
-                  className="slider-slide-content"
-                  style={{
-                    backgroundImage: `url(${image})`,
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "100%",
-                    //tu cos zmienic ze zdjęciami
-                  
-                  }}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
+  <div className="slider-container">
+    {car.images.length >= 1 ? (
+      <Slider {...sliderSettings}>
+        {car.images.map((image, index) => (
+          <div key={index} className="slider-slide">
+            <div
+              className="slider-slide-content"
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "100%",
+              }}
+            />
+          </div>
+        ))}
+      </Slider>
+    ) : null}
+  </div>
+</div>
+
 
       <h2 className="faq__header">Parametry pojazdu</h2>
-      <PayButton
-   reservedCar={car}
-  
-  />
+
       <section className="section-center">
         <div className="container-fluid">
           <div className="row justify-content-center align-items-center">
@@ -520,7 +531,10 @@ const CarDetailsForm = ({ car }) => {
                       selected={startDate}
                       // value={startDate}
                       // onChange={onStartDateChanged}
-                      onChange={(date) => setStartDate(date)}
+                      onChange={(date) => {
+                        console.log("StartDate changed:", date);
+                        setStartDate(date);
+                      }}
                       showTimeSelect
                       timeFormat="HH:mm"
                       timeIntervals={15}
@@ -542,7 +556,10 @@ const CarDetailsForm = ({ car }) => {
                       className="rent-datePicker"
                       id="endDatePicker"
                       selected={endDate}
-                      onChange={(date) => setEndDate(date)}
+                      onChange={(date) => {
+                        console.log("EndDate changed:", date);
+                        setEndDate(date);
+                      }}
                       showTimeSelect
                       timeFormat="HH:mm"
                       timeIntervals={15}
@@ -874,16 +891,22 @@ const CarDetailsForm = ({ car }) => {
     Anuluj rezerwację
   </button>
 
-  <button className="btn btn-primary" onClick={handleNextStep}>
-    {currentStep === "finalConfirmation"
-      ? "Przejdź do płatności"
-      : "Przejdź dalej"}
-  </button>
-
+  {currentStep === "finalConfirmation" ? (
   <PayButton
-   reservedCar={car}
+    reservedCar={car}
     onReserveClick={onSaveReservationClicked}
+    roundedTotalRentalPrice={roundedTotalRentalPrice}
+    startDate={startDate}
+    endDate={endDate}
   />
+) : (
+  <button className="btn btn-primary" onClick={handleNextStep}>
+    Przejdź dalej
+  </button>
+)}
+
+
+
 </Modal.Footer>
         </div>
       </Modal>

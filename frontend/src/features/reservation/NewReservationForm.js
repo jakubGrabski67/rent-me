@@ -65,6 +65,7 @@ const NewReservationForm = ({ users }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [promoCode, setPromoCode] = useState('');
     const [reservationStatus, setReservationStatus] = useState('');
+    const [totalRentalPrice, setTotalRentalPrice] = useState('');
 
     useEffect(() => {
         if (isSuccess) {
@@ -86,6 +87,7 @@ const NewReservationForm = ({ users }) => {
       setPhoneNumber("");
       setPromoCode("");
       setReservationStatus("");
+      setTotalRentalPrice("");
       navigate("/dash/dashboard/reservations");
         }
     }, [isSuccess, navigate])
@@ -107,8 +109,8 @@ const NewReservationForm = ({ users }) => {
   const onEmailChanged = (e) => setEmail(e.target.value);
   const onPhoneNumberChanged = (e) => setPhoneNumber(e.target.value);
   const onPromoCodeChanged = (e) => setPromoCode(e.target.value);
-  const onReservationStatusChanged = (e) =>
-    setReservationStatus(e.target.value);
+  const onReservationStatusChanged = (e) => setReservationStatus(e.target.value);
+  const onTotalRentalPriceChanged = (e) => setTotalRentalPrice(e.target.value);
 
     const onStartDateChange = (newStartDate, setStartDate) => {
       console.log("Nowa data rozpoczęcia:", newStartDate);
@@ -139,7 +141,8 @@ const NewReservationForm = ({ users }) => {
     email,
     phoneNumber,
     promoCode,
-    reservationStatus
+    reservationStatus,
+    totalRentalPrice
   ].every(Boolean) && !isLoading;
 
   const onSaveReservationClicked = async (e) => {
@@ -162,7 +165,8 @@ const NewReservationForm = ({ users }) => {
             email,
             phoneNumber,
             promoCode,
-            reservationStatus
+            reservationStatus,
+            totalRentalPrice
           })
         navigate('/dash/dashboard/reservations');
     }
@@ -466,6 +470,17 @@ const NewReservationForm = ({ users }) => {
           name="promoCode"
           value={promoCode}
           onChange={onPromoCodeChanged}
+        />
+
+<label className="form__label" htmlFor="note-text">
+          Cena za okres wypożyczenia:
+        </label>
+        <textarea
+          className={`form__input form__input--title`}
+          id="totalRentalPrice"
+          name="totalRentalPrice"
+          value={totalRentalPrice}
+          onChange={onTotalRentalPriceChanged}
         />
 
 <div className="form__divider">
