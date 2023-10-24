@@ -16,10 +16,8 @@ import pl from "date-fns/locale/pl";
 import { useAddNewReservationMutation } from "../../features/reservation/reservationApiSlice";
 import PayButton from "./PayButton";
 
-
 const CarDetailsForm = ({ car }) => {
-  const [addNewReservation, { isLoading}] =
-    useAddNewReservationMutation();
+  const [addNewReservation, { isLoading }] = useAddNewReservationMutation();
 
   // const navigate = useNavigate();
 
@@ -44,8 +42,9 @@ const CarDetailsForm = ({ car }) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [promoCode, setPromoCode] = useState("Brak");
-  const [reservationStatus/*, setReservationStatus*/] = useState("Oczekuje na potwierdzenie");
-
+  const [reservationStatus /*, setReservationStatus*/] = useState(
+    "Oczekuje na potwierdzenie"
+  );
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -241,14 +240,15 @@ const CarDetailsForm = ({ car }) => {
   const onStreetChanged = (e) => setStreet(e.target.value);
   const onHouseNumberChanged = (e) => setHouseNumber(e.target.value);
   const onPostalCodeChanged = (e) => setPostalCode(e.target.value);
-  const onDriverLicenseNumberChanged = (e) => setDriverLicenseNumber(e.target.value);
+  const onDriverLicenseNumberChanged = (e) =>
+    setDriverLicenseNumber(e.target.value);
   const onEmailChanged = (e) => setEmail(e.target.value);
   const onPhoneNumberChanged = (e) => setPhoneNumber(e.target.value);
 
   const onPromoCodeChanged = (e) => setPromoCode(e.target.value);
   //const onReservationStatusChanged = (e) => setReservationStatus(e.target.value);
   //const onTotalRentalPrice = (e) => setTotalRentalPrice(roundedTotalRentalPrice);
-  
+
   const [totalRentalPrice, setTotalRentalPrice] = useState("");
 
   useEffect(() => {
@@ -275,39 +275,35 @@ const CarDetailsForm = ({ car }) => {
       phoneNumber,
       promoCode,
       reservationStatus,
-      totalRentalPrice
+      totalRentalPrice,
     ].every(Boolean) && !isLoading;
 
-    
-
-    const onSaveReservationClicked = async () => {
-      if (canSave) {
-        await addNewReservation({
-          car,
-          startDate,
-          endDate,
-          protectionPackage,
-          selectedOptions,
-          selectedPaymentOption,
-          firstName,
-          lastName,
-          country,
-          city,
-          street,
-          houseNumber,
-          postalCode,
-          driverLicenseNumber,
-          email,
-          phoneNumber,
-          promoCode,
-          reservationStatus,
-          totalRentalPrice, // Używamy totalRentalPrice
-        });
-        // navigate("/dash/dashboard/reservations");
-      }
-    };
-  
-    
+  const onSaveReservationClicked = async () => {
+    if (canSave) {
+      await addNewReservation({
+        car,
+        startDate,
+        endDate,
+        protectionPackage,
+        selectedOptions,
+        selectedPaymentOption,
+        firstName,
+        lastName,
+        country,
+        city,
+        street,
+        houseNumber,
+        postalCode,
+        driverLicenseNumber,
+        email,
+        phoneNumber,
+        promoCode,
+        reservationStatus,
+        totalRentalPrice, // Używamy totalRentalPrice
+      });
+      // navigate("/dash/dashboard/reservations");
+    }
+  };
 
   // const errClass = isError ? "errmsg" : "offscreen";
   // const validCarClass = !car ? "form__input--incomplete" : "";
@@ -324,7 +320,9 @@ const CarDetailsForm = ({ car }) => {
   const validStreetClass = !street ? "form__input--incomplete" : "";
   const validHouseNumberClass = !houseNumber ? "form__input--incomplete" : "";
   const validPostalCodeClass = !postalCode ? "form__input--incomplete" : "";
-  const validDriverLicenseNumberClass = !driverLicenseNumber ? "form__input--incomplete" : "";
+  const validDriverLicenseNumberClass = !driverLicenseNumber
+    ? "form__input--incomplete"
+    : "";
   const validEmailClass = !email ? "form__input--incomplete" : "";
   const validPhoneNumberClass = !phoneNumber ? "form__input--incomplete" : "";
 
@@ -336,27 +334,26 @@ const CarDetailsForm = ({ car }) => {
       <HomepageHeader />
 
       <div className="slider-placement">
-  <div className="slider-container">
-    {car.images.length >= 1 ? (
-      <Slider {...sliderSettings}>
-        {car.images.map((image, index) => (
-          <div key={index} className="slider-slide">
-            <div
-              className="slider-slide-content"
-              style={{
-                backgroundImage: `url(${image})`,
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "100%",
-              }}
-            />
-          </div>
-        ))}
-      </Slider>
-    ) : null}
-  </div>
-</div>
-
+        <div className="slider-container">
+          {car.images.length >= 1 ? (
+            <Slider {...sliderSettings}>
+              {car.images.map((image, index) => (
+                <div key={index} className="slider-slide">
+                  <div
+                    className="slider-slide-content"
+                    style={{
+                      backgroundImage: `url(${image})`,
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "100%",
+                    }}
+                  />
+                </div>
+              ))}
+            </Slider>
+          ) : null}
+        </div>
+      </div>
 
       <h2 className="faq__header">Parametry pojazdu</h2>
 
@@ -370,9 +367,6 @@ const CarDetailsForm = ({ car }) => {
                   <div className="row-details">
                     <hr className="hr__details"></hr>
                     <div className="d-flex flex-wrap justify-content-center">
-
-                    
-                    
                       <div className="col-md-2 pt-1">
                         <div className="mb-2">
                           <p className="fw-bold mb-1 text-label">Marka</p>
@@ -382,7 +376,9 @@ const CarDetailsForm = ({ car }) => {
 
                       <div className="col-md-2 pt-1">
                         <div className="mb-2">
-                          <p className="fw-bold mb-1 text-label">Rodzaj paliwa</p>
+                          <p className="fw-bold mb-1 text-label">
+                            Rodzaj paliwa
+                          </p>
                           <p className="text-field">{car.fuelType}</p>
                         </div>
                       </div>
@@ -411,19 +407,15 @@ const CarDetailsForm = ({ car }) => {
                           <p className="text-field">{car.numOfPassengers}</p>
                         </div>
                       </div>
-
                     </div>
                   </div>
 
                   <div className="row-details">
                     <hr className="hr__details"></hr>
                     <div className="d-flex flex-wrap justify-content-center">
-
                       <div className="col-md-2 pt-1">
                         <div className="mb-2">
-                          <p className="fw-bold mb-1 text-label">
-                            Model
-                          </p>
+                          <p className="fw-bold mb-1 text-label">Model</p>
                           <p className="text-field">{car.model}</p>
                         </div>
                       </div>
@@ -461,7 +453,6 @@ const CarDetailsForm = ({ car }) => {
                           <p className="text-field">{car.hp}</p>
                         </div>
                       </div>
-
                     </div>
                   </div>
 
@@ -614,7 +605,7 @@ const CarDetailsForm = ({ car }) => {
                                 : ""
                             }`}
                           >
-                            <span style={{ color: "green" }}>&#10004;</span>{" "}
+                            <span style={{ color: "green" }}>&#10004;</span>
                             {packageInfo.description}
                           </p>
                         )}
@@ -626,7 +617,7 @@ const CarDetailsForm = ({ car }) => {
                                 : ""
                             }`}
                           >
-                            <span style={{ color: "green" }}>&#10004;</span>{" "}
+                            <span style={{ color: "green" }}>&#10004;</span>
                             {packageInfo.description2}
                           </p>
                         )}
@@ -805,19 +796,19 @@ const CarDetailsForm = ({ car }) => {
                     </div>
 
                     <div className="col-md-6">
-  <label htmlFor="promoCode" className="label-promoCode">
-    Kod promocyjny:
-  </label>
-  <input
-    className={`personal-info-input ${validPromoCodeClass}`}
-    type="text"
-    placeholder="Kod rabatowy"
-    id="promoCode"
-    name="promoCode"
-    value={promoCode}
-    onChange={onPromoCodeChanged}
-  />
-</div>
+                      <label htmlFor="promoCode" className="label-promoCode">
+                        Kod promocyjny:
+                      </label>
+                      <input
+                        className={`personal-info-input ${validPromoCodeClass}`}
+                        type="text"
+                        placeholder="Kod rabatowy"
+                        id="promoCode"
+                        name="promoCode"
+                        value={promoCode}
+                        onChange={onPromoCodeChanged}
+                      />
+                    </div>
                   </div>
                 </form>
               </div>
@@ -870,9 +861,6 @@ const CarDetailsForm = ({ car }) => {
                       <p className="final-price">
                         {roundedTotalRentalPrice} PLN
                       </p>
-
-                     
-
                     </div>
                   </div>
                 </div>
@@ -881,33 +869,30 @@ const CarDetailsForm = ({ car }) => {
           </Modal.Body>
 
           <Modal.Footer>
-  <button
-    className="btn btn-secondary"
-    onClick={() => {
-      setShowModal(false);
-      clearFormData(); // Wywołaj funkcję czyszczenia danych
-    }}
-  >
-    Anuluj rezerwację
-  </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                setShowModal(false);
+                clearFormData(); // Wywołaj funkcję czyszczenia danych
+              }}
+            >
+              Anuluj rezerwację
+            </button>
 
-  {currentStep === "finalConfirmation" ? (
-  <PayButton
-    reservedCar={car}
-    onReserveClick={onSaveReservationClicked}
-    roundedTotalRentalPrice={roundedTotalRentalPrice}
-    startDate={startDate}
-    endDate={endDate}
-  />
-) : (
-  <button className="btn btn-primary" onClick={handleNextStep}>
-    Przejdź dalej
-  </button>
-)}
-
-
-
-</Modal.Footer>
+            {currentStep === "finalConfirmation" ? (
+              <PayButton
+                reservedCar={car}
+                onReserveClick={onSaveReservationClicked}
+                roundedTotalRentalPrice={roundedTotalRentalPrice}
+                startDate={startDate}
+                endDate={endDate}
+              />
+            ) : (
+              <button className="btn btn-primary" onClick={handleNextStep}>
+                Przejdź dalej
+              </button>
+            )}
+          </Modal.Footer>
         </div>
       </Modal>
       <HomepageFooter />

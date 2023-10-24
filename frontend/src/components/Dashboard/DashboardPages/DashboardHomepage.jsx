@@ -16,6 +16,7 @@ import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import Helmet from '../../Helmet/Helmet'
 
 import { useGetCarsQuery } from "../../../features/cars/carsApiSlice";
+import { useGetReservationsQuery } from "../../../features/reservation/reservationApiSlice";
 
 
 
@@ -32,25 +33,56 @@ const DashboardHomepage = () => {
   });
   
   const totalRecords = isSuccess ? cars.ids.length : 0;
-  
 
 
+
+  const {
+    data: reservations,
+    //isLoading,
+    //isSuccess,
+    //isError,
+    //error,
+  } = useGetReservationsQuery("reservationsList", {
+    pollingInterval: 15000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
+
+
+  const countPendingReservations = (reservations) => {
+    if (reservations) {
+      const { entities } = reservations;
+      let count = 0;
   
-  const carObj = {
+      for (const reservationId in entities) {
+        if (entities[reservationId].reservationStatus === "Oczekuje na potwierdzenie") {
+          count++;
+        }
+      }
+  
+      return count;
+    }
+  
+    return 0; // Return a default value if reservations is not available.
+  };
+  
+
+  
+  const carsAmount = {
     title: "Posiadane pojazdy",
     totalNumber: totalRecords,
     icon: "ri-police-car-line",
   };
   
 
-const tripObj = {
-  title: "Dzienne trasy",
-  totalNumber: 1697,
+const pendingReservationsAmount = {
+  title: "Niepotwierdzone rezerwacje",
+  totalNumber: countPendingReservations(reservations),
   icon: "ri-steering-2-line",
 };
 
-const clientObj = {
-  title: "Klienci rocznie",
+const dailyVisitsAmount = {
+  title: "Dzisiejsze odwiedziny",
   totalNumber: "85k",
   icon: "ri-user-line",
 };
@@ -71,9 +103,9 @@ const distanceObj = {
         <div className="dashboard">
           <div className="dashboard__wrapper">
             <div className="dashboard__cards">
-              <SingleCard item={carObj} />
-              <SingleCard item={tripObj} />
-              <SingleCard item={clientObj} />
+              <SingleCard item={carsAmount} />
+              <SingleCard item={pendingReservationsAmount} />
+              <SingleCard item={dailyVisitsAmount} />
               <SingleCard item={distanceObj} />
             </div>
   
