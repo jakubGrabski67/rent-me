@@ -320,9 +320,7 @@ const CarDetailsForm = ({ car }) => {
   const validStreetClass = !street ? "form__input--incomplete" : "";
   const validHouseNumberClass = !houseNumber ? "form__input--incomplete" : "";
   const validPostalCodeClass = !postalCode ? "form__input--incomplete" : "";
-  const validDriverLicenseNumberClass = !driverLicenseNumber
-    ? "form__input--incomplete"
-    : "";
+  const validDriverLicenseNumberClass = !driverLicenseNumber ? "form__input--incomplete" : "";
   const validEmailClass = !email ? "form__input--incomplete" : "";
   const validPhoneNumberClass = !phoneNumber ? "form__input--incomplete" : "";
 
@@ -330,7 +328,7 @@ const CarDetailsForm = ({ car }) => {
 
   return (
     <>
-      <Helmet title={"Flota"} />
+      <Helmet title={"Podgląd pojazdu"} />
       <HomepageHeader />
 
       <div className="slider-placement">

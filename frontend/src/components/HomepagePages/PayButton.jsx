@@ -44,7 +44,7 @@ const PayButton = ({ reservedCar, onReserveClick, roundedTotalRentalPrice, start
   }
 
   return (
-    <button className="btn btn-primary" onClick={handleCheckoutAndReserve}>Przejdź do płatności i Zarezerwuj</button>
+    <button className="btn btn-primary" onClick={handleCheckoutAndReserve}>Przejdź do płatności</button>
   );
 }
 

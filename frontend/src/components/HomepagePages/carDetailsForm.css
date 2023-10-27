@@ -3,8 +3,10 @@
   transform: none; 
 }
 .modal-body{
-  height: 44vh !important;
-  min-height: 44vh !important;
+  height: 46vh !important;
+  min-height: 46vh !important;
+  max-height: 46vh !important;
+  padding: var(--bs-modal-padding) !important;
 }
 
 .modal-content{
@@ -293,7 +295,7 @@
 
 .start-end-date-picker {
   display: flex;
-  
+  padding-left: 10vh;
   align-items: center; /* Wycentruj elementy w pionie */
   padding-top: 3vh;
 }
