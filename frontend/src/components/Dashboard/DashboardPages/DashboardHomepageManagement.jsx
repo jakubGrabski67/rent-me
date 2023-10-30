@@ -59,23 +59,23 @@ const DashboardHomepageManagement = () => {
   useEffect(() => {
     const handleCategoryFilter = () => {
       if (!cars) return;
-  
+
       const { ids } = cars;
       if (!ids) return;
-  
+
       const filteredCars = ids.filter((carId) => {
         const car = cars.entities[carId];
         if (!car) return false;
-  
+
         if (selectedCategory === "Brak") {
           // Filtruj tylko rekordy, które mają "Brak" w tablicy carCategory
           return car.carCategory && car.carCategory.includes("Brak");
         }
-  
+
         // Pozostałe filtry
         if (selectedCategory) {
           const selectedCategories = selectedCategory.split(",");
-  
+
           // Sprawdzamy, czy samochód ma przynajmniej jedną z wybranych kategorii
           const hasMatchingCategory = selectedCategories.some((selectedCat) => {
             if (car.carCategory && car.carCategory.includes) {
@@ -83,19 +83,18 @@ const DashboardHomepageManagement = () => {
             }
             return false;
           });
-  
+
           if (!hasMatchingCategory) return false;
         }
-  
+
         return true;
       });
-  
+
       setFilteredIds(filteredCars);
     };
-  
+
     handleCategoryFilter();
   }, [selectedCategory, cars]);
-  
 
   let content;
 
@@ -154,68 +153,79 @@ const DashboardHomepageManagement = () => {
         <DashboardNavbar />
 
         <div className="container-fluid mt-0 content-container">
-        <div className="mt-3 custom-filters-container">
-  <button
-    className={`btn ${selectedCategory === "mostPopularCars" ? "btn-primary" : "btn-secondary"}`}
-    onClick={() => {
-      setSelectedCategory("mostPopularCars");
-    }}
-  >
-    Najpopularniejsze auta
-  </button>
-  <button
-    className={`btn ${selectedCategory === "recentlyAddedCars" ? "btn-primary" : "btn-secondary"}`}
-    onClick={() => {
-      setSelectedCategory("recentlyAddedCars");
-    }}
-  >
-    Nowo dodane auta
-  </button>
-  <button
-    className={`btn ${selectedCategory === "cityCars" ? "btn-primary" : "btn-secondary"}`}
-    onClick={() => {
-      setSelectedCategory("cityCars");
-    }}
-  >
-    Auta miejskie
-  </button>
-  <button
-    className={`btn ${selectedCategory === "familyCars" ? "btn-primary" : "btn-secondary"}`}
-    onClick={() => {
-      setSelectedCategory("familyCars");
-    }}
-  >
-    Auta rodzinne
-  </button>
+          <div className="mt-3 custom-filters-container">
+            <button
+              className={`btn ${
+                selectedCategory === "mostPopularCars"
+                  ? "btn-primary"
+                  : "btn-secondary"
+              }`}
+              onClick={() => {
+                setSelectedCategory("mostPopularCars");
+              }}
+            >
+              Najpopularniejsze auta
+            </button>
+            <button
+              className={`btn ${
+                selectedCategory === "recentlyAddedCars"
+                  ? "btn-primary"
+                  : "btn-secondary"
+              }`}
+              onClick={() => {
+                setSelectedCategory("recentlyAddedCars");
+              }}
+            >
+              Nowo dodane auta
+            </button>
+            <button
+              className={`btn ${
+                selectedCategory === "cityCars"
+                  ? "btn-primary"
+                  : "btn-secondary"
+              }`}
+              onClick={() => {
+                setSelectedCategory("cityCars");
+              }}
+            >
+              Auta miejskie
+            </button>
+            <button
+              className={`btn ${
+                selectedCategory === "familyCars"
+                  ? "btn-primary"
+                  : "btn-secondary"
+              }`}
+              onClick={() => {
+                setSelectedCategory("familyCars");
+              }}
+            >
+              Auta rodzinne
+            </button>
 
-  <button
-  className={`btn ${
-    selectedCategory === 0
-      ? "btn-primary"
-      : "btn-secondary"
-  }`}
-  onClick={() => {
-    setSelectedCategory("Brak");
-    //handleCategoryFilter("Brak"); // Dodaj tę linię, aby wywołać funkcję filtrowania
-  }}
->
-  Auta bez kategorii
-</button>
+            <button
+              className={`btn ${
+                selectedCategory === 0 ? "btn-primary" : "btn-secondary"
+              }`}
+              onClick={() => {
+                setSelectedCategory("Brak");
+                //handleCategoryFilter("Brak"); // Dodaj tę linię, aby wywołać funkcję filtrowania
+              }}
+            >
+              Auta bez kategorii
+            </button>
 
-
-
-  <button
-    className={`btn ${selectedCategory !== "" ? "btn-danger ms-5" : "btn-danger ms-5"}`}
-    onClick={() => {
-      setSelectedCategory("");
-    }}
-  >
-    Usuń filtry
-  </button>
-</div>
-
-
-
+            <button
+              className={`btn ${
+                selectedCategory !== "" ? "btn-danger ms-5" : "btn-danger ms-5"
+              }`}
+              onClick={() => {
+                setSelectedCategory("");
+              }}
+            >
+              Usuń filtry
+            </button>
+          </div>
 
           <div className="custom-card-container pt-3">
             <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -252,45 +262,47 @@ const DashboardHomepageManagement = () => {
                         </div>
 
                         <div className="col-md-6">
-  {selectedFields.slice(2, 3).map((field) => (
-    <div key={field.field} className="mb-2">
-      <p className="p-carCategory fw-bold mb-1">
-        {field.label}
-      </p>
-      <div className="field-carCategory">
-        {entities[carId][field.field] &&
-        entities[carId][field.field].length > 0 ? (
-          entities[carId][field.field].map(
-            (option, index) => (
-              <p className="field" key={index}>
-                {option}
-              </p>
-            )
-          )
-        ) : <p className="field">Brak</p>} {/*warunek kiedy tablica jest pusta*/}
-        {[
-          ...Array(
-            Math.max(
-              4 -
-                (entities[carId][field.field]?.length ||
-                  0),
-              0
-            )
-          ),
-        ].map((_, index) => (
-          <p
-            className="field"
-            key={index}
-            style={{ userSelect: "none" }}
-          >
-            &nbsp;
-          </p>
-        ))}
-      </div>
-    </div>
-  ))}
-</div>
-
+                          {selectedFields.slice(2, 3).map((field) => (
+                            <div key={field.field} className="mb-2">
+                              <p className="p-carCategory fw-bold mb-1">
+                                {field.label}
+                              </p>
+                              <div className="field-carCategory">
+                                {entities[carId][field.field] &&
+                                entities[carId][field.field].length > 0 ? (
+                                  entities[carId][field.field].map(
+                                    (option, index) => (
+                                      <p className="field" key={index}>
+                                        {option}
+                                      </p>
+                                    )
+                                  )
+                                ) : (
+                                  <p className="field">Brak</p>
+                                )}{" "}
+                                {/*warunek kiedy tablica jest pusta*/}
+                                {[
+                                  ...Array(
+                                    Math.max(
+                                      4 -
+                                        (entities[carId][field.field]?.length ||
+                                          0),
+                                      0
+                                    )
+                                  ),
+                                ].map((_, index) => (
+                                  <p
+                                    className="field"
+                                    key={index}
+                                    style={{ userSelect: "none" }}
+                                  >
+                                    &nbsp;
+                                  </p>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
 
                         <div className="col-md-12 text-center pt-5">
                           <Link to={`${carId}`} className="btn btn-primary">

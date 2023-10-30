@@ -4,8 +4,8 @@
 }
 .modal-body{
   height: 46vh !important;
-  min-height: 46vh !important;
-  max-height: 46vh !important;
+  /* min-height: 46vh !important;
+  max-height: 46vh !important; */
   padding: var(--bs-modal-padding) !important;
 }
 
@@ -271,6 +271,14 @@
   }
 
   .personal-info-input{
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    width: 400px;
+    padding-left: 10px;
+  }
+
+  .personal-info-input-2{
     margin-bottom: 10px;
     border: 1px solid lightgray;
     border-radius: 10px;

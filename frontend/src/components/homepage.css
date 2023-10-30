@@ -196,8 +196,8 @@
 }
 
 .homepage-car-img{
-    max-height: 28vh;
-    min-height: 28vh;
+    /* max-height: 28vh; */
+    min-height: 33vh;
     /* width: auto; */
     
     object-fit: cover;
@@ -235,4 +235,24 @@
 
 .car__name{
     color: #0a1d37;
+}
+
+/* Rozdzielczość HD (1366x768) */
+@media screen and (min-width: 1366px) and (max-width: 1366px) and (min-height: 768px) and (max-height: 768px) {
+   .hero__content{
+    min-height: 75vh;
+   }
+   
+   .timer__count img {
+    padding-top: 30px;
+   }
+
+   .homepage-car-img{
+    height: 35vh;
+   }
+
+   .car__item{
+    height: 49vh;
+   }
+
 }

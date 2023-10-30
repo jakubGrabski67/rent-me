@@ -688,6 +688,7 @@ const CarDetailsForm = ({ car }) => {
                 <form className="personal-info-form">
                   <div className="row personal-info-row">
                     {/* Pierwsza kolumna */}
+                    
                     <div className="col-md-4">
                       <input
                         className={`personal-info-input ${validFirstNameClass}`}
@@ -741,9 +742,11 @@ const CarDetailsForm = ({ car }) => {
                     </div>
 
                     {/* Druga kolumna */}
+
                     <div className="col-md-4">
+                    
                       <input
-                        className={`personal-info-input ${validCityClass}`}
+                        className={`personal-info-input-2 ${validCityClass}`}
                         type="text"
                         placeholder="Miasto"
                         id="city"
@@ -753,7 +756,7 @@ const CarDetailsForm = ({ car }) => {
                       />
 
                       <input
-                        className={`personal-info-input ${validPostalCodeClass}`}
+                        className={`personal-info-input-2 ${validPostalCodeClass}`}
                         type="text"
                         placeholder="Kod pocztowy"
                         id="postalCode"
@@ -763,7 +766,7 @@ const CarDetailsForm = ({ car }) => {
                       />
 
                       <input
-                        className={`personal-info-input ${validDriverLicenseNumberClass}`}
+                        className={`personal-info-input-2 ${validDriverLicenseNumberClass}`}
                         type="text"
                         placeholder="Numer prawa jazdy"
                         id="driverLicenseNumber"
@@ -773,7 +776,7 @@ const CarDetailsForm = ({ car }) => {
                       />
 
                       <input
-                        className={`personal-info-input ${validEmailClass}`}
+                        className={`personal-info-input-2 ${validEmailClass}`}
                         type="text"
                         placeholder="Email"
                         id="email"
@@ -783,7 +786,7 @@ const CarDetailsForm = ({ car }) => {
                       />
 
                       <input
-                        className={`personal-info-input ${validPhoneNumberClass}`}
+                        className={`personal-info-input-2 ${validPhoneNumberClass}`}
                         type="text"
                         placeholder="Numer telefonu"
                         id="phoneNumber"
@@ -798,7 +801,7 @@ const CarDetailsForm = ({ car }) => {
                         Kod promocyjny:
                       </label>
                       <input
-                        className={`personal-info-input ${validPromoCodeClass}`}
+                        className={`personal-info-input-2 ${validPromoCodeClass}`}
                         type="text"
                         placeholder="Kod rabatowy"
                         id="promoCode"
@@ -854,7 +857,7 @@ const CarDetailsForm = ({ car }) => {
                       <p className="mb-3">{optionsPrice} PLN</p>
                     </div>
                     <div className="price-item-full">
-                      <hr></hr>
+                      <hr className="hr__final-price"></hr>
                       <h5>Całkowita kwota wypożyczenia pojazdu:</h5>
                       <p className="final-price">
                         {roundedTotalRentalPrice} PLN
