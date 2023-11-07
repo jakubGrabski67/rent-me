@@ -15,7 +15,7 @@ const mileChart = () => {
     <ResponsiveContainer width="100%">
       <BarChart data={kilometersStaticsData}>
         <XAxis dataKey="name" stroke="#2884ff" />
-        <Bar dataKey="mileStats" stroke="#2884ff" fill="#2884ff" barSize={30} />
+        <Bar dataKey="rezerwacje" stroke="#2884ff" fill="#2884ff" barSize={30} />
 
         <Tooltip wrapperClassName="tooltip__style" cursor={false} />
       </BarChart>

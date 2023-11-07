@@ -82,14 +82,14 @@ const pendingReservationsAmount = {
 };
 
 const dailyVisitsAmount = {
-  title: "Dzisiejsze odwiedziny",
-  totalNumber: "85k",
+  title: "Aktywne wypożyczenia",
+  totalNumber: 5,
   icon: "ri-user-line",
 };
 
 const distanceObj = {
-  title: "Dzienne kilometry",
-  totalNumber: 2167,
+  title: "Aktywny kod promocyjny",
+  totalNumber: "summer15",
   icon: "ri-timer-flash-line",
 };
 
@@ -111,14 +111,14 @@ const distanceObj = {
   
             <div className="statics d-flex justify-content-center align-items-center">
               <div className="stats" >
-                <h3 className="stats__title">Rezerwacje w konkretne dni</h3>
+                <h3 className="stats__title">Popularność rezerwacji w poszczególne dni</h3>
                 <MileChart />
               </div>
             </div>
 
             <div className="statics d-flex justify-content-center align-items-center">
               <div className="stats">
-                <h3 className="stats__title">Rezerwacje w tym tygodniu</h3>
+                <h3 className="stats__title">Zestawienie rezerwacji w bieżącym i poprzednim tygodniu</h3>
                 <CarStatsChart />
               </div>
             </div>

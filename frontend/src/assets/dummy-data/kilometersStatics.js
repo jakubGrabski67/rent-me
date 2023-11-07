@@ -1,31 +1,31 @@
 const mileStatics = [
   {
     name: "Poniedziałek",
-    mileStats: 6000,
+    rezerwacje: 60,
   },
   {
     name: "Wtorek",
-    mileStats: 5000,
+    rezerwacje: 51,
   },
   {
     name: "Środa",
-    mileStats: 7000,
+    rezerwacje: 70,
   },
   {
     name: "Czwartek",
-    mileStats: 5780,
+    rezerwacje: 23,
   },
   {
     name: "Piątek",
-    mileStats: 4890,
+    rezerwacje: 138,
   },
   {
     name: "Sobota",
-    mileStats: 6390,
+    rezerwacje: 98,
   },
   {
     name: "Niedziela",
-    mileStats: 5490,
+    rezerwacje: 70,
   },
 ];
 

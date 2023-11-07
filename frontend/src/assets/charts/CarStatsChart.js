@@ -33,14 +33,14 @@ const CarStatsChart = () => {
         <Tooltip wrapperClassName="tooltip__style" cursor={false} />
         <Area
           type="monotone"
-          dataKey="week"
+          dataKey="Bieżący"
           stroke="#8884d8"
           fillOpacity={1}
           fill="url(#colorUv)"
         />
         <Area
           type="monotone"
-          dataKey="prevWeek"
+          dataKey="Poprzedni"
           stroke="#82ca9d"
           fillOpacity={1}
           fill="url(#colorPv)"
