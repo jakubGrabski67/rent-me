@@ -6,9 +6,9 @@ import SingleCard from "../reuseable/SingleCard";
 import MileChart from "../../../assets/charts/MileChart";
 import CarStatsChart from "../../../assets/charts/CarStatsChart";
 
-import RecommendCarCard from "../DashboardUI/RecommendCarCard";
+// import RecommendCarCard from "../DashboardUI/RecommendCarCard";
 
-import recommendCarsData from "../../../assets/dummy-data/recommendCars";
+// import recommendCarsData from "../../../assets/dummy-data/recommendCars";
 
 import DashboardNavbarLeft from "../DashboardNavbarLeft/DashboardNavbarLeft";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
@@ -109,28 +109,27 @@ const distanceObj = {
               <SingleCard item={distanceObj} />
             </div>
   
-            <div className="statics">
-              <div className="stats">
-                <h3 className="stats__title">Statystyki pokonanych kilometrów</h3>
+            <div className="statics d-flex justify-content-center align-items-center">
+              <div className="stats" >
+                <h3 className="stats__title">Rezerwacje w konkretne dni</h3>
                 <MileChart />
               </div>
-  
+            </div>
+
+            <div className="statics d-flex justify-content-center align-items-center">
               <div className="stats">
-                <h3 className="stats__title">Statystyki wypożyczonych pojazdów</h3>
+                <h3 className="stats__title">Rezerwacje w tym tygodniu</h3>
                 <CarStatsChart />
               </div>
             </div>
   
-            <div className="recommend__cars-wrapper">
+            {/* <div className="recommend__cars-wrapper">
               {recommendCarsData.map((item) => (
                 <RecommendCarCard item={item} key={item.id} />
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
-  
-       
-       
       </>
     </Helmet>
   );
