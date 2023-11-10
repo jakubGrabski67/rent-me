@@ -323,3 +323,8 @@
   color: black;
   margin-right: 50px;
 }
+
+.error-message{
+  color: red;
+  padding-top: 15vh;
+}

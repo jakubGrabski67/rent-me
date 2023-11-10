@@ -25,11 +25,12 @@ const CarDetailsForm = ({ car }) => {
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [dateError, setDateError] = useState("");
   const [currentStep, setCurrentStep] = useState("dateSelection");
   const [showModal, setShowModal] = useState(false);
   const [protectionPackage, setProtectionPackage] = useState("STANDARD");
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [selectedPaymentOption, setSelectedPaymentOption] = useState("");
+  const [selectedPaymentOption, setSelectedPaymentOption] = useState("Online");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -41,7 +42,8 @@ const CarDetailsForm = ({ car }) => {
   const [driverLicenseNumber, setDriverLicenseNumber] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [promoCode, setPromoCode] = useState("Brak");
+  const [promoCode, setPromoCode] = useState("");
+  const [promoCodeInput, setPromoCodeInput] = useState("");
   const [reservationStatus /*, setReservationStatus*/] = useState(
     "Oczekuje na potwierdzenie"
   );
@@ -52,7 +54,7 @@ const CarDetailsForm = ({ car }) => {
         if (startDate && endDate) {
           setCurrentStep("protectionPackageSelection");
         } else {
-          console.log("Proszę wybrać daty.");
+          setDateError("Proszę wybrać poprawne daty.");
         }
         break;
       case "protectionPackageSelection":
@@ -63,18 +65,53 @@ const CarDetailsForm = ({ car }) => {
         }
         break;
       case "optionsSelection":
-        setCurrentStep("paymentOptions");
-        break;
-      case "paymentOptions":
-        if (selectedPaymentOption) {
-          console.log("Wybrana opcja płatności:", selectedPaymentOption);
-          setCurrentStep("personalInformation");
-        } else {
-          console.log("Proszę wybrać opcję płatności.");
-        }
+        setCurrentStep("personalInformation");
         break;
       case "personalInformation":
+        // Sprawdź, czy wszystkie pola są wypełnione
+        const isPersonalInfoValid =
+          firstName &&
+          lastName &&
+          country &&
+          street &&
+          houseNumber &&
+          city &&
+          postalCode &&
+          driverLicenseNumber &&
+          email &&
+          phoneNumber;
+
+        // Jeśli niektóre pola nie są wypełnione, zablokuj przejście i wyświetl komunikat
+        if (!isPersonalInfoValid) {
+          alert("Wypełnij wszystkie pola.");
+          return;
+        }
+
+        // Jeśli wszystkie pola są wypełnione, przejdź do kolejnego kroku
         setCurrentStep("finalConfirmation");
+        break;
+      case "finalConfirmation":
+        // Dodaj kod obsługujący potwierdzenie
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handlePreviousStep = () => {
+    // Dodaj kod obsługujący cofanie kroku wstecz
+    switch (currentStep) {
+      case "protectionPackageSelection":
+        setCurrentStep("dateSelection");
+        break;
+      case "optionsSelection":
+        setCurrentStep("protectionPackageSelection");
+        break;
+      case "personalInformation":
+        setCurrentStep("optionsSelection");
+        break;
+      case "finalConfirmation":
+        setCurrentStep("personalInformation");
         break;
       default:
         break;
@@ -127,16 +164,16 @@ const CarDetailsForm = ({ car }) => {
     },
   ];
 
-  const paymentOptions = [
-    "Karta kredytowa",
-    "Przelew bankowy",
-    "PayPal",
-    "Gotówka",
-  ];
+  // const paymentOptions = [
+  //   "Karta kredytowa",
+  //   "Przelew bankowy",
+  //   "PayPal",
+  //   "Gotówka",
+  // ];
 
-  const handlePaymentOptionChange = (event) => {
-    setSelectedPaymentOption(event.target.value);
-  };
+  // const handlePaymentOptionChange = (event) => {
+  //   setSelectedPaymentOption(event.target.value);
+  // };
 
   const handleSelectPackage = (packageName) => {
     setProtectionPackage(packageName);
@@ -233,27 +270,168 @@ const CarDetailsForm = ({ car }) => {
   // const onSelectedOptionsChanged = (e) => setSelectedOptions(e.target.value);
   // const onSelectedPaymentOptionChanged = (e) => setSelectedPaymentOption(e.target.value);
 
-  const onFirstNameChanged = (e) => setFirstName(e.target.value);
-  const onLastNameChanged = (e) => setLastName(e.target.value);
-  const onCountryChanged = (e) => setCountry(e.target.value);
-  const onCityChanged = (e) => setCity(e.target.value);
-  const onStreetChanged = (e) => setStreet(e.target.value);
-  const onHouseNumberChanged = (e) => setHouseNumber(e.target.value);
-  const onPostalCodeChanged = (e) => setPostalCode(e.target.value);
-  const onDriverLicenseNumberChanged = (e) =>
-    setDriverLicenseNumber(e.target.value);
-  const onEmailChanged = (e) => setEmail(e.target.value);
-  const onPhoneNumberChanged = (e) => setPhoneNumber(e.target.value);
+  const isAlphabetic = (input) => /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/.test(input);
 
-  const onPromoCodeChanged = (e) => setPromoCode(e.target.value);
+  const onFirstNameChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 20);
+    if (
+      (isAlphabetic(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.length <= 20
+    ) {
+      setFirstName(maxValueLength);
+    }
+  };
+
+  const onLastNameChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 20);
+    if (
+      (isAlphabetic(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.length <= 20
+    ) {
+      setLastName(maxValueLength);
+    }
+  };
+
+  const onCountryChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 20);
+    if (
+      (isAlphabetic(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.length <= 20
+    ) {
+      setCountry(maxValueLength);
+    }
+  };
+
+  const onCityChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 20);
+    if (
+      (isAlphabetic(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.length <= 20
+    ) {
+      setCity(maxValueLength);
+    }
+  };
+
+  const onStreetChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 20);
+    if (
+      (isAlphabetic(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.length <= 20
+    ) {
+      setStreet(maxValueLength);
+    }
+  };
+
+  const onHouseNumberChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 10);
+
+    // Sprawdź, czy wprowadzone dane to liczby i ewentualnie jeden znak '/'
+    if (
+      (/^[\d/]*$/.test(maxValueLength) || maxValueLength === "") &&
+      (maxValueLength.indexOf("/") === maxValueLength.lastIndexOf("/") ||
+        maxValueLength.indexOf("/") === -1)
+    ) {
+      setHouseNumber(maxValueLength);
+    }
+  };
+
+  const onPostalCodeChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 10);
+
+    // Sprawdź, czy wprowadzone dane to liczby i ewentualnie jeden znak '-'
+    if (
+      (/^[\d-]*$/.test(maxValueLength) || maxValueLength === "") &&
+      (maxValueLength.indexOf("-") === maxValueLength.lastIndexOf("-") ||
+        maxValueLength.indexOf("-") === -1)
+    ) {
+      setPostalCode(maxValueLength);
+    }
+  };
+
+  const onDriverLicenseNumberChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 16);
+    // Sprawdź, czy wprowadzone dane to litery i cyfry (lub puste)
+    if (
+      (/^[a-zA-Z0-9]*$/.test(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.length <= 16
+    ) {
+      setDriverLicenseNumber(maxValueLength);
+    }
+  };
+
+  const onEmailChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 30);
+
+    // Sprawdź, czy wprowadzone dane to litery, cyfry, tylko jeden znak '@' i jeden znak '.'
+    if (
+      (/^[a-zA-Z0-9@.]*$/.test(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.indexOf("@") === maxValueLength.lastIndexOf("@") &&
+      maxValueLength.indexOf(".") === maxValueLength.lastIndexOf(".")
+    ) {
+      setEmail(maxValueLength);
+    }
+  };
+
+  const onPhoneNumberChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 13); // Zwiększyłem maksymalną długość do 13, aby uwzględnić znak '+'
+
+    // Sprawdź, czy wprowadzone dane to cyfry i ewentualnie znak '+'
+    if (
+      (/^[0-9+]*$/.test(maxValueLength) || maxValueLength === "") &&
+      (maxValueLength.indexOf("+") === -1 ||
+        (maxValueLength.indexOf("+") === 0 &&
+          maxValueLength.lastIndexOf("+") === 0))
+    ) {
+      setPhoneNumber(maxValueLength);
+    }
+  };
+
+  const onPromoCodeChanged = (e) => {
+    const { value } = e.target;
+    const maxValueLength = value.slice(0, 20);
+    // Sprawdź, czy wprowadzone dane to litery i cyfry (lub puste)
+    if (
+      (/^[a-zA-Z0-9]*$/.test(maxValueLength) || maxValueLength === "") &&
+      maxValueLength.length <= 20
+    ) {
+      setPromoCodeInput(maxValueLength);
+    }
+  };
+
   //const onReservationStatusChanged = (e) => setReservationStatus(e.target.value);
   //const onTotalRentalPrice = (e) => setTotalRentalPrice(roundedTotalRentalPrice);
 
   const [totalRentalPrice, setTotalRentalPrice] = useState("");
 
   useEffect(() => {
+    setPromoCode("Brak");
+  }, []);
+
+  useEffect(() => {
     setTotalRentalPrice(roundedTotalRentalPrice);
   }, [roundedTotalRentalPrice]);
+
+  //Komunikat znikający po 10 sekundach
+  useEffect(() => {
+    if (dateError) {
+      const timeoutId = setTimeout(() => {
+        setDateError(null);
+      }, 10000);
+
+      // Wyczyszczenie timeoutu, gdy komponent jest odmontowywany
+      return () => clearTimeout(timeoutId);
+    }
+  }, [dateError]);
 
   const canSave =
     [
@@ -280,6 +458,7 @@ const CarDetailsForm = ({ car }) => {
 
   const onSaveReservationClicked = async () => {
     if (canSave) {
+      const finalPromoCode = promoCodeInput || "Brak";
       await addNewReservation({
         car,
         startDate,
@@ -297,7 +476,7 @@ const CarDetailsForm = ({ car }) => {
         driverLicenseNumber,
         email,
         phoneNumber,
-        promoCode,
+        promoCode: finalPromoCode,
         reservationStatus,
         totalRentalPrice, // Używamy totalRentalPrice
       });
@@ -320,11 +499,13 @@ const CarDetailsForm = ({ car }) => {
   const validStreetClass = !street ? "form__input--incomplete" : "";
   const validHouseNumberClass = !houseNumber ? "form__input--incomplete" : "";
   const validPostalCodeClass = !postalCode ? "form__input--incomplete" : "";
-  const validDriverLicenseNumberClass = !driverLicenseNumber ? "form__input--incomplete" : "";
+  const validDriverLicenseNumberClass = !driverLicenseNumber
+    ? "form__input--incomplete"
+    : "";
   const validEmailClass = !email ? "form__input--incomplete" : "";
   const validPhoneNumberClass = !phoneNumber ? "form__input--incomplete" : "";
 
-  const validPromoCodeClass = !promoCode ? "form__input--incomplete" : "";
+  // const validPromoCodeClass = !promoCode ? "form__input--incomplete" : "";
 
   return (
     <>
@@ -561,6 +742,8 @@ const CarDetailsForm = ({ car }) => {
                     />
                   </div>
                 </div>
+                {/* Komunikat o błędzie */}
+                {dateError && <div className="error-message">{dateError}</div>}
               </div>
             )}
 
@@ -662,7 +845,7 @@ const CarDetailsForm = ({ car }) => {
               </div>
             )}
 
-            {currentStep === "paymentOptions" && (
+            {/* {currentStep === "paymentOptions" && (
               <div className="options-selection">
                 <h2 className="centered">Wybierz opcję płatności</h2>
                 <div className="centered">
@@ -680,7 +863,7 @@ const CarDetailsForm = ({ car }) => {
                   </select>
                 </div>
               </div>
-            )}
+            )} */}
 
             {currentStep === "personalInformation" && (
               <div className="personal-info-form">
@@ -688,7 +871,7 @@ const CarDetailsForm = ({ car }) => {
                 <form className="personal-info-form">
                   <div className="row personal-info-row">
                     {/* Pierwsza kolumna */}
-                    
+
                     <div className="col-md-4">
                       <input
                         className={`personal-info-input ${validFirstNameClass}`}
@@ -733,7 +916,7 @@ const CarDetailsForm = ({ car }) => {
                       <input
                         className={`personal-info-input ${validHouseNumberClass}`}
                         type="text"
-                        placeholder="Numer domu"
+                        placeholder="Numer domu lub mieszkania"
                         id="houseNumber"
                         name="houseNumber"
                         value={houseNumber}
@@ -744,7 +927,6 @@ const CarDetailsForm = ({ car }) => {
                     {/* Druga kolumna */}
 
                     <div className="col-md-4">
-                    
                       <input
                         className={`personal-info-input-2 ${validCityClass}`}
                         type="text"
@@ -795,19 +977,15 @@ const CarDetailsForm = ({ car }) => {
                         onChange={onPhoneNumberChanged}
                       />
                     </div>
-
                     <div className="col-md-6">
-                      <label htmlFor="promoCode" className="label-promoCode">
-                        Kod promocyjny:
-                      </label>
                       <input
-                        className={`personal-info-input-2 ${validPromoCodeClass}`}
+                        className={`personal-info-input-2 `}
                         type="text"
-                        placeholder="Kod rabatowy"
+                        placeholder="Kod promocyjny"
                         id="promoCode"
                         name="promoCode"
-                        value={promoCode}
-                        onChange={onPromoCodeChanged}
+                        value={promoCodeInput}
+                        onChange={(e) => onPromoCodeChanged(e)}
                       />
                     </div>
                   </div>
@@ -868,10 +1046,9 @@ const CarDetailsForm = ({ car }) => {
               </div>
             )}
           </Modal.Body>
-
           <Modal.Footer>
             <button
-              className="btn btn-secondary"
+              className="btn btn-danger"
               onClick={() => {
                 setShowModal(false);
                 clearFormData(); // Wywołaj funkcję czyszczenia danych
@@ -881,17 +1058,35 @@ const CarDetailsForm = ({ car }) => {
             </button>
 
             {currentStep === "finalConfirmation" ? (
-              <PayButton
-                reservedCar={car}
-                onReserveClick={onSaveReservationClicked}
-                roundedTotalRentalPrice={roundedTotalRentalPrice}
-                startDate={startDate}
-                endDate={endDate}
-              />
+              <>
+                <button
+                  className="btn btn-secondary"
+                  onClick={handlePreviousStep}
+                >
+                  Wróć
+                </button>
+                <PayButton
+                  reservedCar={car}
+                  onReserveClick={onSaveReservationClicked}
+                  roundedTotalRentalPrice={roundedTotalRentalPrice}
+                  startDate={startDate}
+                  endDate={endDate}
+                />
+              </>
             ) : (
-              <button className="btn btn-primary" onClick={handleNextStep}>
-                Przejdź dalej
-              </button>
+              <>
+                {currentStep !== "dateSelection" && (
+                  <button
+                    className="btn btn-secondary"
+                    onClick={handlePreviousStep}
+                  >
+                    Wróć
+                  </button>
+                )}
+                <button className="btn btn-primary" onClick={handleNextStep}>
+                  Przejdź dalej
+                </button>
+              </>
             )}
           </Modal.Footer>
         </div>
