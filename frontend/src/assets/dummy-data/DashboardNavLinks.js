@@ -1,42 +1,42 @@
 const DashboardNavLinks = [
   {
     path: "/dash/dashboard/panel",
-    icon: "ri-apps-2-line",
-    display: "Dashboard",
+    icon: "ri-dashboard-line",
+    display: "Panel główny",
   },
   {
-    path: "/dash/dashboard/sell-car",
-    icon: "ri-shopping-bag-line",
-    display: "Historia pojazdów",
+    path: "/dash/dashboard/service-history",
+    icon: "ri-car-line",
+    display: "Historia i serwis pojazdów",
   },
   {
     path: "/dash/dashboard/flota",
-    icon: "ri-settings-2-line",
+    icon: "ri-truck-line",
     display: "Zarządzanie flotą",
   },
   {
     path: "/dash/dashboard/customers",
-    icon: "ri-settings-2-line",
+    icon: "ri-user-settings-line",
     display: "Zarządzanie klientami",
   },
   {
     path: "/dash/dashboard/reservations",
-    icon: "ri-settings-2-line",
+    icon: "ri-calendar-line",
     display: "Zarządzanie rezerwacjami",
   },
   {
     path: "/dash/dashboard/homepageManagement",
-    icon: "ri-settings-2-line",
+    icon: "ri-home-line",
     display: "Zarządzanie stroną główną",
   },
   {
     path: "/dash/dashboard/documentation",
-    icon: "ri-shopping-bag-line",
+    icon: "ri-file-text-line",
     display: "Dokumentacja",
   },
   {
     path: "/dash/dashboard/settings",
-    icon: "ri-settings-2-line",
+    icon: "ri-settings-3-line",
     display: "Ustawienia",
   },
 ];

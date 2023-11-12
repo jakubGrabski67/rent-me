@@ -18,7 +18,7 @@ import {ROLES} from './config/roles';
 import DashboardHomepage from './components/Dashboard/DashboardPages/DashboardHomepage'
 
 import DashboardSettings from './components/Dashboard/DashboardPages/DashboardSettings'
-import DashboardSellCar from './components/Dashboard/DashboardPages/DashboardSellCar'
+import DashboardServiceHistory from './components/Dashboard/DashboardPages/DashboardServiceHistory'
 // import DashboardFlota from './components/Dashboard/DashboardPages/DashboardFlota'
 import DashboardCustomers from './components/Dashboard/DashboardPages/DashboardCustomers'
 import DashboardDocumentation from './components/Dashboard/DashboardPages/DashboardDocumentation'
@@ -110,7 +110,7 @@ import CheckoutSuccess from './CheckoutSuccess';
 
 
               {/* <Route path="/dash/dashboard/new" element={<NewNoteForm />} /> */}
-              <Route path="/dash/dashboard/sell-car" element={<DashboardSellCar />} />
+              <Route path="/dash/dashboard/service-history" element={<DashboardServiceHistory />} />
               <Route path="/dash/dashboard/settings" element={<DashboardSettings />} />
               {/* <Route path="/dash/dashboard/flota" element={<DashboardFlota />} /> */}
               <Route path="/dash/dashboard/customers" element={<DashboardCustomers />} />
