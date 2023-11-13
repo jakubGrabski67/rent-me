@@ -12,7 +12,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
     // If no users 
     if (!users?.length) {
-        return res.status(400).json({ message: 'No users found' })
+        return res.status(400).json({ message: 'Nie znaleziono użytkowników.' })
     }
 
     res.json(users)
@@ -22,18 +22,19 @@ const getAllUsers = asyncHandler(async (req, res) => {
 // @route POST /users
 // @access Private
 const createNewUser = asyncHandler(async (req, res) => {
-    const { username, password, roles } = req.body
+    const { username, password, roles, name, surname, dateOfBirth, nationality, address, gender, phoneNumber, profilePicture } = req.body
 
     // Confirm data
-    if (!username || !password || !Array.isArray(roles) || !roles.length) {
-        return res.status(400).json({ message: 'All fields are required' })
+    if (!username || !password || !Array.isArray(roles) || !name || !surname || !dateOfBirth || !nationality
+        || !address || !gender || !phoneNumber || !profilePicture ||  !roles.length) {
+        return res.status(400).json({ message: 'Wszystkie pola są wymagane.' })
     }
 
     // Check for duplicate username
     const duplicate = await User.findOne({ username }).lean().exec()
 
     if (duplicate) {
-        return res.status(409).json({ message: 'Duplicate username' })
+        return res.status(409).json({ message: 'Zduplikowano nazwę użytkownika.' })
     }
 
     // Hash password 
@@ -45,9 +46,9 @@ const createNewUser = asyncHandler(async (req, res) => {
     const user = await User.create(userObject)
 
     if (user) { //created 
-        res.status(201).json({ message: `New user ${username} created` })
+        res.status(201).json({ message: `Nowy użytkownik o nazwie: ${username} został utworzony.` })
     } else {
-        res.status(400).json({ message: 'Invalid user data received' })
+        res.status(400).json({ message: 'Otrzymano nieprawidłowe dane o użytkowniku.' })
     }
 })
 
@@ -55,18 +56,19 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @route PATCH /users
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, username, roles, active, password } = req.body
+    const { id, username, roles, active, password, name, surname, dateOfBirth, nationality, address, gender, phoneNumber, profilePicture } = req.body
 
     // Confirm data 
-    if (!id || !username || !Array.isArray(roles) || !roles.length || typeof active !== 'boolean') {
-        return res.status(400).json({ message: 'All fields except password are required' })
+    if (!id || !username || !Array.isArray(roles) || !roles.length || typeof active !== 'boolean' || !name || !surname || !dateOfBirth || !nationality
+    || !address || !gender || !phoneNumber || !profilePicture) {
+        return res.status(400).json({ message: 'Wszystkie pola poza hasłem są wymagane.' })
     }
 
     // Does the user exist to update?
     const user = await User.findById(id).exec()
 
     if (!user) {
-        return res.status(400).json({ message: 'User not found' })
+        return res.status(400).json({ message: 'Użytkownik nie został znaleziony.' })
     }
 
     // Check for duplicate 
@@ -74,12 +76,20 @@ const updateUser = asyncHandler(async (req, res) => {
 
     // Allow updates to the original user 
     if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate username' })
+        return res.status(409).json({ message: 'Zduplikowano nazwę użytkownika.' })
     }
 
     user.username = username
     user.roles = roles
     user.active = active
+    user.name = name
+    user.surname = surname
+    user.dateOfBirth = dateOfBirth
+    user.nationality = nationality
+    user.address = address
+    user.gender = gender
+    user.phoneNumber = phoneNumber
+    user.profilePicture = profilePicture
 
     if (password) {
         // Hash password 
@@ -88,7 +98,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
     const updatedUser = await user.save()
 
-    res.json({ message: `${updatedUser.username} updated` })
+    res.json({ message: `Użytkownik o nazwie: ${updatedUser.username} został zaktualizowany.` })
 })
 
 // @desc Delete a user
@@ -99,25 +109,25 @@ const deleteUser = asyncHandler(async (req, res) => {
 
     // Confirm data
     if (!id) {
-        return res.status(400).json({ message: 'User ID Required' })
+        return res.status(400).json({ message: 'Wymagane jest ID użytkownika.' })
     }
 
     // Does the user still have assigned notes?
     const note = await Note.findOne({ user: id }).lean().exec()
     if (note) {
-        return res.status(400).json({ message: 'User has assigned notes' })
+        return res.status(400).json({ message: 'Użytkownik ma przypisane zadania!' })
     }
 
     // Does the user exist to delete?
     const user = await User.findById(id).exec()
 
     if (!user) {
-        return res.status(400).json({ message: 'User not found' })
+        return res.status(400).json({ message: 'Użytkownik nie został znaleziony.' })
     }
 
     const result = await user.deleteOne()
 
-    const reply = `Username ${result.username} with ID ${result._id} deleted`
+    const reply = `Użytkownik: ${result.username} z ID ${result._id} został usunięty.`
 
     res.json(reply)
 })

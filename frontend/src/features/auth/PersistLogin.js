@@ -54,13 +54,13 @@ const PersistLogin = () => {
         content = <Outlet />
     } else if (isLoading) { //persist: yes, token: no
         console.log('loading')
-        content = <p>Loading...</p>
+        content = <p>Ładowanie...</p>
     } else if (isError) { //persist: yes, token: no
         console.log('error')
         content = (
             <p className='errmsg'>
                 {`${error?.data?.message} - `}
-                <Link to="/login">Please login again</Link>.
+                <Link to="/login">Zaloguj się ponownie.</Link>.
             </p>
         )
     } else if (isSuccess && trueSuccess) { //persist: yes, token: yes
