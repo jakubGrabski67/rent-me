@@ -5,10 +5,27 @@ import "../../DashboardStyles/DashboardDocumentation.css";
 
 const Formularz1 = ({ formData, handleChange, handlePrint, goBack }) => {
 
-   
+  const handlePrintForm1 = () => {
+    const form1Labels = {
+      vehicleMakeAndModel: 'Marka i model pojazdu',
+    vehicleRegistrationNumber: 'Numer rejestracyjny',
+    vehicleYearOfProduction: 'Rok produkcji',
+    rentalStartDate: 'Data i godzina rozpoczęcia najmu',
+    rentalEndDate: 'Data i godzina zakończenia najmu',
+    basicFee: 'Opłata podstawowa',
+    additionalFees: 'Opłaty dodatkowe',
+    insuranceCosts: 'Koszty ubezpieczenia',
+    fuelLevel: 'Poziom paliwa',
+    returnLocation: 'Miejsce zwrotu',
+    returnDate: 'Termin zwrotu',
+      // Dodaj inne etykiety dla formularza 2
+    };
+
+    handlePrint('Raport o stanie pojazdu', form1Labels);
+  };
     const handleSaveAsPDF = () => {
         const pdf = new jsPDF();
-        pdf.text('Treść Formularza 1', 10, 10); // Dodaj treść formularza do pliku PDF
+        pdf.text('Umowa najmu pojazdu', 10, 10); // Dodaj treść formularza do pliku PDF
         pdf.save('Umowa_najmu_pojazdu.pdf'); // Zapisz jako plik PDF o nazwie 'Formularz1.pdf'
       };
   return (
@@ -152,17 +169,17 @@ const Formularz1 = ({ formData, handleChange, handlePrint, goBack }) => {
         </Col>
       </Form.Group>
 
-   <div className='pt-3'>
-      <Button variant="primary" onClick={() => handlePrint('Treść Formularza 1')}>
-          Drukuj
-        </Button>
-        <Button variant="primary" onClick={handleSaveAsPDF}>
-        Zapisz plik jako PDF
-      </Button>
-        <Button variant="secondary" onClick={goBack}>
-        Wróć
-      </Button>
-      </div>
+      <div className='pt-3'>
+  <Button variant="primary" onClick={handlePrintForm1}>
+    Drukuj
+  </Button>
+  <Button variant="primary" onClick={handleSaveAsPDF}>
+    Zapisz plik jako PDF
+  </Button>
+  <Button variant="secondary" onClick={goBack}>
+    Wróć
+  </Button>
+</div>
     </Container>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import HomepageHeader from "../HomepageHeader/HomepageHeader";
 import HomepageFooter from "../HomepageFooter/HomepageFooter";
 import Helmet from "../Helmet/Helmet";
-import offer3 from "../../assets/images/offer3.avif";
+import offer3 from "../../assets/images/offer3.jpg";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 

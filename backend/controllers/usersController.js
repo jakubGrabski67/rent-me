@@ -3,14 +3,13 @@ const Note = require('../models/Note')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt')
 
-// @desc Get all users
-// @route GET /users
-// @access Private
+// Get all users
+// GET /users
 const getAllUsers = asyncHandler(async (req, res) => {
-    // Get all users from MongoDB
+    // Pobierz wszystkich użytkowników z bazy danych
     const users = await User.find().select('-password').lean()
 
-    // If no users 
+    // Jeśli nie ma użytkowników
     if (!users?.length) {
         return res.status(400).json({ message: 'Nie znaleziono użytkowników.' })
     }
@@ -18,34 +17,33 @@ const getAllUsers = asyncHandler(async (req, res) => {
     res.json(users)
 })
 
-// @desc Create new user
-// @route POST /users
-// @access Private
+// Create new user
+// POST /users
 const createNewUser = asyncHandler(async (req, res) => {
     const { username, password, roles, name, surname, dateOfBirth, nationality, address, gender, phoneNumber, profilePicture } = req.body
 
-    // Confirm data
+    // Potwierdzenie danych
     if (!username || !password || !Array.isArray(roles) || !name || !surname || !dateOfBirth || !nationality
         || !address || !gender || !phoneNumber || !profilePicture ||  !roles.length) {
         return res.status(400).json({ message: 'Wszystkie pola są wymagane.' })
     }
 
-    // Check for duplicate username
+    // Sprawdzanie czy nazwa użytkownika jest zduplikowana
     const duplicate = await User.findOne({ username }).lean().exec()
 
     if (duplicate) {
         return res.status(409).json({ message: 'Zduplikowano nazwę użytkownika.' })
     }
 
-    // Hash password 
-    const hashedPwd = await bcrypt.hash(password, 10) // salt rounds
+    // Hashowanie hasła
+    const hashedPwd = await bcrypt.hash(password, 10) // "Salt rounds"
 
     const userObject = { username, "password": hashedPwd, roles }
 
-    // Create and store new user 
+    // Tworzenie i przechowywanie nowego użytkownika
     const user = await User.create(userObject)
 
-    if (user) { //created 
+    if (user) { // Utworzono
         res.status(201).json({ message: `Nowy użytkownik o nazwie: ${username} został utworzony.` })
     } else {
         res.status(400).json({ message: 'Otrzymano nieprawidłowe dane o użytkowniku.' })

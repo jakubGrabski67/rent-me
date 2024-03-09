@@ -1,14 +1,15 @@
 import React from 'react';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
-import jsPDF from 'jspdf'; // Importuje jsPDF
+import jsPDF from 'jspdf';
 import "../../DashboardStyles/DashboardDocumentation.css";
 
 const Formularz3 = ({ formData, handleChange, handlePrint, goBack }) => {
-    const handleSaveAsPDF = () => {
-        const pdf = new jsPDF();
-        pdf.text('Treść Formularza 1', 10, 10); // Dodaj treść formularza do pliku PDF
-        pdf.save('Potwierdzenie_ubezpieczenia.pdf'); // Zapisz jako plik PDF o nazwie 'Formularz1.pdf'
-      };
+  const handleSaveAsPDF = () => {
+    const pdf = new jsPDF();
+    pdf.text('Potwierdzenie ubezpieczenia', 10, 10);
+    pdf.save('Potwierdzenie_ubezpieczenia.pdf');
+  };
+
   return (
     <Container className="rental-agreement-form">
       <h1 className="mt-5 h2-documentation">POTWIERDZENIE UBEZPIECZENIA</h1>
@@ -70,7 +71,7 @@ const Formularz3 = ({ formData, handleChange, handlePrint, goBack }) => {
         </Col>
       </Form.Group>
 
-      <h2 className='h2-documentation pt-3'>Jest objęty polisą ubezpieczeniową zawartą z firmą PZU.</h2>
+      <h2 className='h2-documentation pt-3'>Jest objęty polisą ubezpieczeniową zawartą z firmą XYZ.</h2>
 
       <Form.Group as={Row} className="mb-3 pt-3">
         <Form.Label column sm="4">
@@ -116,16 +117,24 @@ const Formularz3 = ({ formData, handleChange, handlePrint, goBack }) => {
         </Col>
       </Form.Group>
 
-<div className='pt-3'>
-      <Button variant="primary" onClick={() => handlePrint('Treść Formularza 3')}>
-        Drukuj
-      </Button>
-      <Button variant="primary" onClick={handleSaveAsPDF}>
-        Zapisz plik jako PDF
-      </Button>
-      <Button variant="secondary" onClick={goBack}>
-        Wróć
-      </Button>
+      <div className='pt-3'>
+        <Button variant="primary" onClick={() => handlePrint('Potwierdzenie ubezpieczenia', {
+          vehicleMakeAndModel: 'Marka i model',
+          vehicleRegistrationNumber: 'Numer rejestracyjny',
+          insuranceStartDate: 'Data rozpoczecia ochrony',
+          insuranceEndDate: 'Data zakonczenia ochrony',
+          policyNumber: 'Numer polisy',
+          coverageScope: 'Zakres ochrony',
+          contactNumber: 'Numer kontaktowy',
+        })}>
+          Drukuj
+        </Button>
+        <Button variant="primary" onClick={handleSaveAsPDF}>
+          Zapisz plik jako PDF
+        </Button>
+        <Button variant="secondary" onClick={goBack}>
+          Wróć
+        </Button>
       </div>
     </Container>
   );

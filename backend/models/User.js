@@ -9,10 +9,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    roles: [{
-        type: String,
-        default: "Employee"
-    }],
+    
     name: {
         type: String,
         
@@ -41,16 +38,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         
     },
-    profilePicture: [
+    profilePicture: 
         {
             type: String,
-            required: true
+            
         }
-    ],
+    ,
     active: {
         type: Boolean,
         default: true
-    }
+    },
+    roles: [{
+        type: String,
+        default: "Employee"
+    }],
 })
 
 module.exports = mongoose.model('User', userSchema)

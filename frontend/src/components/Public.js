@@ -6,20 +6,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../components/homepage.css";
 import { Container, Row, Col } from "reactstrap";
-import heroImg1 from "../assets/images/hero-img1.jpg";
-import offer2 from "../assets/images/offer2.avif";
-import offer3 from "../assets/images/offer3.avif";
-import offer4 from "../assets/images/offer4.avif";
-import offer5 from "../assets/images/offer5.avif";
+import offer2 from "../assets/images/offer2.jpg";
+import offer3 from "../assets/images/offer3.jpg";
+import offer4 from "../assets/images/offer4.jpg";
+import offer5 from "../assets/images/offer5.jpg";
 import specialOffer from "../assets/images/specialOffer.png";
 import Services from "../services/Services";
-//import CarsList from "./Ul/CarsList";
-//import products from "../assets/data/products";
 import Clock from "./Ul/Clock";
 import Slider from "react-slick";
-
-//import { useNavigate } from "react-router-dom";
-
 import { useGetCarsQuery } from "../features/cars/carsApiSlice";
 
 const Public = () => {
@@ -52,68 +46,19 @@ const Public = () => {
 
     let displayedIds = ids.length > 0 ? ids : ids;
 
-    //
-
     return (
       <>
         <HomepageHeader />
         <Helmet title={"Strona główna"}>
           <section className="hero__section">
             <Slider {...sliderSettings}>
-              <div className="hero__container">
-                <div
-                  className="hero__content custom-slide"
-                  style={{
-                    backgroundImage: `url(${heroImg1})`,
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "100%",
-                  }}
-                >
-                  <p className="hero__subtitle">
-                    Najpopularniejsze samochody w {year} roku!
-                  </p>
-                  <h2>BMW X5 M i X6 M.</h2>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 1.2 }}
-                    className="slider__btn"
-                  >
-                    <Link to="/shop">Zobacz</Link>
-                  </motion.button>
-                </div>
-              </div>
-
-              <div className="hero__container">
-                <div
-                  className="hero__content"
-                  style={{
-                    backgroundImage: `url(${offer2})`,
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "100%",
-                  }}
-                >
-                  <p className="hero__subtitle">
-                    Najpopularniejsze samochody w {year} roku!
-                  </p>
-                  <h2>Coupé Klasy E.</h2>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 1.2 }}
-                    className="slider__btn"
-                  >
-                    <Link to="/shop">Zobacz</Link>
-                  </motion.button>
-                </div>
-              </div>
-
-              <div className="hero__container">
+              
+            <div className="hero__container">
                 <div
                   className="hero__content"
                   style={{
                     backgroundImage: `url(${offer3})`,
-                    backgroundPosition: "center",
+                    //backgroundPositionY: "center",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "100%",
                   }}
@@ -136,8 +81,32 @@ const Public = () => {
                 <div
                   className="hero__content"
                   style={{
+                    backgroundImage: `url(${offer2})`,
+                    // backgroundPositionY: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "100%", 
+                  }}
+                >
+                  <p className="hero__subtitle">
+                    Najpopularniejsze samochody w {year} roku!
+                  </p>
+                  <h2>Coupé Klasy E.</h2>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 1.2 }}
+                    className="slider__btn"
+                  >
+                    <Link to="/shop">Zobacz</Link>
+                  </motion.button>
+                </div>
+              </div>
+
+              <div className="hero__container">
+                <div
+                  className="hero__content"
+                  style={{
                     backgroundImage: `url(${offer4})`,
-                    backgroundPosition: "center",
+                  //  backgroundPositionY: "center",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "100%",
                   }}
@@ -161,7 +130,7 @@ const Public = () => {
                   className="hero__content"
                   style={{
                     backgroundImage: `url(${offer5})`,
-                    backgroundPosition: "center",
+                    // backgroundPositionY: "center",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "100%",
                   }}
@@ -202,11 +171,11 @@ const Public = () => {
                         );
                       })
                       .map((carId) => (
-                        <div key={carId} className="col mb-2">
+                        <div key={carId} className="col mb-2"> 
                           <div className="car__item">
                             <Slider {...sliderSettings}>
                               {entities[carId].images.map((image, index) => (
-                                <div key={index}>
+                                <div key={index} >
                                   <img
                                     className="homepage-car-img"
                                     src={image}
@@ -221,7 +190,6 @@ const Public = () => {
                                 {entities[carId].brand}&nbsp;
                                 {entities[carId].model}
                               </h3>
-                              {/* <span>{entities[carId].model}</span> */}
                             </div>
                             <div className="car__card-bottom d-flex align-items-center justify-content-between p-2">
                               <span className="price">
@@ -279,7 +247,6 @@ const Public = () => {
                                 {entities[carId].brand}&nbsp;
                                 {entities[carId].model}
                               </h3>
-                              {/* <span>{entities[carId].model}</span> */}
                             </div>
                             <div className="car__card-bottom d-flex align-items-center justify-content-between p-2">
                               <span className="price">
@@ -368,7 +335,6 @@ const Public = () => {
                                 {entities[carId].brand}&nbsp;
                                 {entities[carId].model}
                               </h3>
-                              {/* <span>{entities[carId].model}</span> */}
                             </div>
                             <div className="car__card-bottom d-flex align-items-center justify-content-between p-2">
                               <span className="price">
@@ -410,7 +376,7 @@ const Public = () => {
                         );
                       })
                       .map((carId) => (
-                        <div key={carId} className="col mb-2">
+                        <div key={carId} className="col mb-2 ">
                           <div className="car__item">
                             <Slider
                               className="slider--homepage"
@@ -431,7 +397,6 @@ const Public = () => {
                                 {entities[carId].brand}&nbsp;
                                 {entities[carId].model}
                               </h3>
-                              {/* <span>{entities[carId].model}</span> */}
                             </div>
                             <div className="car__card-bottom d-flex align-items-center justify-content-between p-2">
                               <span className="price">
@@ -455,8 +420,6 @@ const Public = () => {
             </Container>
           </section>
         </Helmet>
-
-        {/*Importuje Footer do strony głównej*/}
         <HomepageFooter />
       </>
     );

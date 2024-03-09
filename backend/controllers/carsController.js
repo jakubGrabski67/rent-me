@@ -15,9 +15,7 @@ const getAllCars = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'Nie znaleziono pojazdów.' })
     }
 
-    // Add username to each car before sending the response 
-    // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
-    // You could also do this with a for...of loop
+
     const carsWithUser = await Promise.all(cars.map(async (car) => {
       
         const user = await User.findById(car.user).lean().exec()

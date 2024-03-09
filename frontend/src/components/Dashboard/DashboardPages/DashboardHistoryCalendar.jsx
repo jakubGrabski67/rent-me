@@ -22,8 +22,8 @@ const DashboardHistoryCalendar = () => {
 
   const vehicles = [
     { id: 0, name: "Wszystkie pojazdy" },
-    { id: 1, name: "Samochód 1" },
-    { id: 2, name: "Samochód 2" },
+    { id: 1, name: "BMW X5" },
+    { id: 2, name: "Mercedes W203" },
   ];
 
   const fetchEvents = async (vehicleId) => {
@@ -33,29 +33,29 @@ const DashboardHistoryCalendar = () => {
         id: 1,
         title: "Wymiana opon",
         description: "Wymiana opon letnich na zimowe",
-        start: new Date("2023-11-15T10:00:00"),
-        end: new Date("2023-11-15T12:00:00"),
+        start: new Date("2024-02-15T10:00:00"),
+        end: new Date("2024-02-15T12:00:00"),
       },
       {
         id: 2,
         title: "Konserwacja wnętrza",
         description: "Konserwacja wnętrza",
-        start: new Date("2023-11-23T10:00:00"),
-        end: new Date("2023-11-23T12:00:00"),
+        start: new Date("2024-02-23T10:00:00"),
+        end: new Date("2024-02-23T12:00:00"),
       },
       {
         id: 3,
         title: "Wymiana części",
         description: "Wymiana sondy lambda",
-        start: new Date("2023-11-17T10:00:00"),
-        end: new Date("2023-11-17T12:00:00"),
+        start: new Date("2024-02-17T10:00:00"),
+        end: new Date("2024-02-17T12:00:00"),
       },
       {
         id: 4,
         title: "Wymiana części",
         description: "Wymiana tarcz, klocków i szczęk hamulcowych. Wymiana wahacza (PT).",
-        start: new Date("2023-11-27T10:00:00"),
-        end: new Date("2023-11-27T12:00:00"),
+        start: new Date("2024-02-27T10:00:00"),
+        end: new Date("2024-02-27T12:00:00"),
       },
     ];
 
@@ -64,29 +64,29 @@ const DashboardHistoryCalendar = () => {
         id: 1,
         title: "Wymiana opon",
         description: "Wymiana opon letnich na zimowe",
-        start: new Date("2023-11-14T10:00:00"),
-        end: new Date("2023-11-14T12:00:00"),
+        start: new Date("2024-02-14T10:00:00"),
+        end: new Date("2024-02-14T12:00:00"),
       },
       {
         id: 2,
         title: "Konserwacja wnętrza",
         description: "Konserwacja wnętrza",
-        start: new Date("2023-11-22T10:00:00"),
-        end: new Date("2023-11-22T12:00:00"),
+        start: new Date("2024-02-22T10:00:00"),
+        end: new Date("2024-02-22T12:00:00"),
       },
       {
         id: 3,
         title: "Wymiana części",
         description: "Wymiana sondy lambda",
-        start: new Date("2023-11-16T10:00:00"),
-        end: new Date("2023-11-16T12:00:00"),
+        start: new Date("2024-02-16T10:00:00"),
+        end: new Date("2024-02-16T12:00:00"),
       },
       {
         id: 4,
         title: "Wymiana części",
         description: "Wymiana tarcz, klocków i szczęk hamulcowych. Wymiana wahacza (PT).",
-        start: new Date("2023-11-26T10:00:00"),
-        end: new Date("2023-11-26T12:00:00"),
+        start: new Date("2024-02-26T10:00:00"),
+        end: new Date("2024-02-26T12:00:00"),
       },
     ];
 

@@ -1,5 +1,8 @@
 /* CarsList.css */
 /* Dodajmy styl dla elementu Slider */
+.shop__car__card{
+  min-width: 60vh;
+}
 .slick-slider {
     position: relative;
     box-sizing: border-box;
@@ -74,7 +77,9 @@
   }
   
   .custom-filters-container-flota {
-    margin-left: 150px; /* Dostosuj wartość przesunięcia według potrzeb */
+    margin-left: 11vh; /* Dostosuj wartość przesunięcia według potrzeb */
+    margin-bottom: 2vh;
+    padding-top: 2vh;
   }
   
   .custom-card-container-flota {

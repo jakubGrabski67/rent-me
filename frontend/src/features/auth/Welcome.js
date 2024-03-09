@@ -1,47 +1,55 @@
-import { Link } from 'react-router-dom'
-import useAuth from '../../hooks/useAuth'
-
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Welcome = () => {
+  const { username, isManager, isAdmin } = useAuth();
 
-    const {username, isManager, isAdmin} = useAuth()
+  const date = new Date();
+  const today = new Intl.DateTimeFormat("pl-PL", {
+    dateStyle: "long",
+    timeStyle: "medium",
+  }).format(date);
 
-    const date = new Date()
-    const today = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'long', timeStyle: 'medium' }).format(date)
+  const content = (
+    <section className="welcome">
+      <p>{today}</p>
 
-    const content = (
-     
-        
-        <section className="welcome">
+      <h1 style={{color: "white"}}>Witaj {username}!</h1>
 
-            <p>{today}</p>
+      <p>&nbsp;</p>
 
-            <h1>Witaj {username}!</h1>
+      <p>
+        <Link to="/dash/notes">Wyświetl listę zadań</Link>
+      </p>
 
-            <p>&nbsp;</p>
+      <p>
+        <Link to="/dash/notes/new">Dodaj nowe zadanie</Link>
+      </p>
 
-            <p><Link to="/dash/notes">Wyświetl listę zadań</Link></p>
+      <p>&nbsp;</p>
 
-            <p><Link to="/dash/notes/new">Dodaj nowe zadanie</Link></p>
+      {(isManager || isAdmin) && (
+        <p>
+          <Link to="/dash/users">Wyświetl listę pracowników</Link>
+        </p>
+      )}
 
-            <p>&nbsp;</p>
+      {(isManager || isAdmin) && (
+        <p>
+          <Link to="/dash/users/new">Dodaj nowego pracownika</Link>
+        </p>
+      )}
 
-            {/* {(isManager || isAdmin) && <p><Link to="/dash/cars">View Cars</Link></p>}
+      <p>&nbsp;</p>
 
-            {(isManager || isAdmin) && <p><Link to="/dash/cars/new">Add new Car</Link></p>} */}
+      {(isManager || isAdmin) && (
+        <p>
+          <Link to="/dash/dashboard/panel">Przejdź do dashboardu</Link>
+        </p>
+      )}
+    </section>
+  );
 
-            {(isManager || isAdmin) && <p><Link to="/dash/users">Wyświetl listę pracowników</Link></p>}
-
-            {(isManager || isAdmin) &&<p><Link to="/dash/users/new">Dodaj nowego pracownika</Link></p>}
-
-            <p>&nbsp;</p>
-
-            {(isManager || isAdmin) &&<p><Link to="/dash/dashboard/panel">Przejdź do dashboardu</Link></p>}
-
-        </section>
-        
-    )
-
-    return content
-}
-export default Welcome
+  return content;
+};
+export default Welcome;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,20 +11,29 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
-
-//import { useNavigate } from "react-router-dom";
+import { addDays, isToday } from "date-fns";
 import { useAddNewReservationMutation } from "../../features/reservation/reservationApiSlice";
 import PayButton from "./PayButton";
 
 const CarDetailsForm = ({ car }) => {
+
   const [addNewReservation, { isLoading }] = useAddNewReservationMutation();
 
-  // const navigate = useNavigate();
+  const roundToNearestInterval = (date, interval) => {
+    const roundedMinutes = Math.round(date.getMinutes() / interval) * interval;
+    const roundedDate = new Date(date);
+    roundedDate.setMinutes(roundedMinutes);
+    return roundedDate;
+  };
 
   registerLocale("pl", pl);
 
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(roundToNearestInterval(new Date(), 15));
+
+  const [calendarOpened, setCalendarOpened] = useState(false);
+
+  const [endDate, setEndDate] = useState(roundToNearestInterval(addDays(new Date(), 1), 15));
+
   const [dateError, setDateError] = useState("");
   const [currentStep, setCurrentStep] = useState("dateSelection");
   const [showModal, setShowModal] = useState(false);
@@ -47,6 +56,30 @@ const CarDetailsForm = ({ car }) => {
   const [reservationStatus /*, setReservationStatus*/] = useState(
     "Oczekuje na potwierdzenie"
   );
+  const CustomDatePickerInput = forwardRef(({ value, onClick }, ref) => (
+    <input
+      type="text"
+      value={value}
+      onClick={onClick}
+      readOnly
+      style={{ cursor: "pointer" }}
+      ref={ref}
+    />
+  ));
+
+  useEffect(() => {
+    let timeoutId;
+
+    if (calendarOpened && isToday(startDate)) {
+      timeoutId = setTimeout(() => {
+        setStartDate(new Date());
+      }, 600000); // Oczekuj co najmniej 10 minuty przed kolejną aktualizacją
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [calendarOpened, startDate]);
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -164,17 +197,6 @@ const CarDetailsForm = ({ car }) => {
     },
   ];
 
-  // const paymentOptions = [
-  //   "Karta kredytowa",
-  //   "Przelew bankowy",
-  //   "PayPal",
-  //   "Gotówka",
-  // ];
-
-  // const handlePaymentOptionChange = (event) => {
-  //   setSelectedPaymentOption(event.target.value);
-  // };
-
   const handleSelectPackage = (packageName) => {
     setProtectionPackage(packageName);
   };
@@ -263,13 +285,6 @@ const CarDetailsForm = ({ car }) => {
     setCurrentStep("dateSelection");
   };
 
-  // const onCarChanged = (e) => setCar(e.target.value);
-  // const onStartDateChanged = (e) => setStartDate(e.target.value);
-  // const onEndDateChanged = (e) => setEndDate(e.target.value);
-  // const onProtectionPackageChanged = (e) => setProtectionPackage(e.target.value);
-  // const onSelectedOptionsChanged = (e) => setSelectedOptions(e.target.value);
-  // const onSelectedPaymentOptionChanged = (e) => setSelectedPaymentOption(e.target.value);
-
   const isAlphabetic = (input) => /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/.test(input);
 
   const onFirstNameChanged = (e) => {
@@ -308,10 +323,11 @@ const CarDetailsForm = ({ car }) => {
   const onCityChanged = (e) => {
     const { value } = e.target;
     const maxValueLength = value.slice(0, 20);
-    if (
-      (isAlphabetic(maxValueLength) || maxValueLength === "") &&
-      maxValueLength.length <= 20
-    ) {
+
+    // Wyrażenie regularne dopuszcza wszelkie znaki Unicode oprócz cyfr
+    const regex = /^[^\d]*$/;
+
+    if (regex.test(maxValueLength) || maxValueLength === "") {
       setCity(maxValueLength);
     }
   };
@@ -319,10 +335,11 @@ const CarDetailsForm = ({ car }) => {
   const onStreetChanged = (e) => {
     const { value } = e.target;
     const maxValueLength = value.slice(0, 20);
-    if (
-      (isAlphabetic(maxValueLength) || maxValueLength === "") &&
-      maxValueLength.length <= 20
-    ) {
+
+    // Wyrażenie regularne dopuszcza wszelkie znaki Unicode oprócz cyfr
+    const regex = /^[^\d]*$/;
+
+    if (regex.test(maxValueLength) || maxValueLength === "") {
       setStreet(maxValueLength);
     }
   };
@@ -331,9 +348,9 @@ const CarDetailsForm = ({ car }) => {
     const { value } = e.target;
     const maxValueLength = value.slice(0, 10);
 
-    // Sprawdź, czy wprowadzone dane to liczby i ewentualnie jeden znak '/'
+    // Sprawdź, czy wprowadzone dane to liczby, litery lub ewentualnie jeden znak '/'
     if (
-      (/^[\d/]*$/.test(maxValueLength) || maxValueLength === "") &&
+      (/^[a-zA-Z\d/]*$/.test(maxValueLength) || maxValueLength === "") &&
       (maxValueLength.indexOf("/") === maxValueLength.lastIndexOf("/") ||
         maxValueLength.indexOf("/") === -1)
     ) {
@@ -360,7 +377,7 @@ const CarDetailsForm = ({ car }) => {
     const maxValueLength = value.slice(0, 16);
     // Sprawdź, czy wprowadzone dane to litery i cyfry (lub puste)
     if (
-      (/^[a-zA-Z0-9]*$/.test(maxValueLength) || maxValueLength === "") &&
+      (/^[a-zA-Z0-9/]*$/.test(maxValueLength) || maxValueLength === "") &&
       maxValueLength.length <= 16
     ) {
       setDriverLicenseNumber(maxValueLength);
@@ -375,7 +392,7 @@ const CarDetailsForm = ({ car }) => {
     if (
       (/^[a-zA-Z0-9@.]*$/.test(maxValueLength) || maxValueLength === "") &&
       maxValueLength.indexOf("@") === maxValueLength.lastIndexOf("@") &&
-      maxValueLength.indexOf(".") === maxValueLength.lastIndexOf(".")
+      maxValueLength.indexOf("...") === maxValueLength.lastIndexOf("...")
     ) {
       setEmail(maxValueLength);
     }
@@ -383,17 +400,24 @@ const CarDetailsForm = ({ car }) => {
 
   const onPhoneNumberChanged = (e) => {
     const { value } = e.target;
-    const maxValueLength = value.slice(0, 13); // Zwiększyłem maksymalną długość do 13, aby uwzględnić znak '+'
 
-    // Sprawdź, czy wprowadzone dane to cyfry i ewentualnie znak '+'
-    if (
-      (/^[0-9+]*$/.test(maxValueLength) || maxValueLength === "") &&
-      (maxValueLength.indexOf("+") === -1 ||
-        (maxValueLength.indexOf("+") === 0 &&
-          maxValueLength.lastIndexOf("+") === 0))
-    ) {
-      setPhoneNumber(maxValueLength);
+    // Usuń spacje i znak '+', jeśli istnieją, aby dodać je na nowo po trzech cyfrach
+    const cleanValue = value.replace(/[\s+]/g, "");
+
+    // Podziel wartość na części po trzech cyfrach
+    const parts = cleanValue.match(/\d{1,3}/g);
+
+    // Jeśli istnieją części, połącz je spacją i dodaj ewentualny znak '+'
+    let formattedValue = "";
+    if (parts) {
+      formattedValue = parts.join(" ");
+      if (value.indexOf("+") === 0) {
+        formattedValue = `+${formattedValue}`;
+      }
     }
+
+    // Ustaw sformatowany numer telefonu
+    setPhoneNumber(formattedValue);
   };
 
   const onPromoCodeChanged = (e) => {
@@ -407,9 +431,6 @@ const CarDetailsForm = ({ car }) => {
       setPromoCodeInput(maxValueLength);
     }
   };
-
-  //const onReservationStatusChanged = (e) => setReservationStatus(e.target.value);
-  //const onTotalRentalPrice = (e) => setTotalRentalPrice(roundedTotalRentalPrice);
 
   const [totalRentalPrice, setTotalRentalPrice] = useState("");
 
@@ -480,17 +501,8 @@ const CarDetailsForm = ({ car }) => {
         reservationStatus,
         totalRentalPrice, // Używamy totalRentalPrice
       });
-      // navigate("/dash/dashboard/reservations");
     }
   };
-
-  // const errClass = isError ? "errmsg" : "offscreen";
-  // const validCarClass = !car ? "form__input--incomplete" : "";
-  // const validStartDateClass = !startDate ? "form__input--incomplete" : "";
-  // const validEndDateClass = !endDate ? "form__input--incomplete" : "";
-  // const validProtectionPackageClass = !protectionPackage ? "form__input--incomplete" : "";
-  // const validSelectedOptionsClass = !selectedOptions ? "form__input--incomplete" : "";
-  // const validSelectedPaymentOptionClass = !selectedPaymentOption ? "form__input--incomplete" : "";
 
   const validFirstNameClass = !firstName ? "form__input--incomplete" : "";
   const validLastNameClass = !lastName ? "form__input--incomplete" : "";
@@ -499,13 +511,9 @@ const CarDetailsForm = ({ car }) => {
   const validStreetClass = !street ? "form__input--incomplete" : "";
   const validHouseNumberClass = !houseNumber ? "form__input--incomplete" : "";
   const validPostalCodeClass = !postalCode ? "form__input--incomplete" : "";
-  const validDriverLicenseNumberClass = !driverLicenseNumber
-    ? "form__input--incomplete"
-    : "";
+  const validDriverLicenseNumberClass = !driverLicenseNumber ? "form__input--incomplete" : "";
   const validEmailClass = !email ? "form__input--incomplete" : "";
   const validPhoneNumberClass = !phoneNumber ? "form__input--incomplete" : "";
-
-  // const validPromoCodeClass = !promoCode ? "form__input--incomplete" : "";
 
   return (
     <>
@@ -651,7 +659,6 @@ const CarDetailsForm = ({ car }) => {
                       </div>
                     </div>
                   </div>
-
                   <p className="fw-bold mb-1 text-label">Status pojazdu</p>
                   <div className="d-flex justify-content-center align-items-center">
                     <p
@@ -666,7 +673,10 @@ const CarDetailsForm = ({ car }) => {
                   <div className="d-flex justify-content-center align-items-center">
                     <button
                       onClick={openReservationForm}
-                      className="btn btn-primary"
+                      className={`reservation__button btn btn-primary ${
+                        car.completed ? "" : "disabled"
+                      }`}
+                      disabled={!car.completed}
                     >
                       Zarezerwuj teraz
                     </button>
@@ -679,7 +689,7 @@ const CarDetailsForm = ({ car }) => {
       </section>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <div className="form-container">
+        <div className="form-container" >
           <Modal.Header closeButton>
             <Modal.Title>Formularz rezerwacji pojazdu</Modal.Title>
           </Modal.Header>
@@ -699,21 +709,37 @@ const CarDetailsForm = ({ car }) => {
                       id="startDate"
                       name="startDate"
                       selected={startDate}
-                      // value={startDate}
-                      // onChange={onStartDateChanged}
                       onChange={(date) => {
                         console.log("StartDate changed:", date);
                         setStartDate(date);
                       }}
+                      onCalendarOpen={() => {
+                        // Ustaw minTime tylko dla dzisiejszej daty
+                        setCalendarOpened(true);
+                      }}
+                      onCalendarClose={() => {
+                        // Resetuj flagę po zamknięciu kalendarza
+                        setCalendarOpened(false);
+                      }}
                       showTimeSelect
                       timeFormat="HH:mm"
                       timeIntervals={15}
-                      minTime={new Date().setHours(6, 0, 0, 0)}
-                      maxTime={new Date().setHours(17, 0, 0, 0)}
+                      minTime={
+                        isToday(startDate) && startDate
+                          ? new Date().setMinutes(new Date().getMinutes())
+                          : new Date().setHours(6, 0, 0, 0)
+                      }
+                      maxTime={
+                        isToday(startDate)
+                          ? new Date().setHours(18, 0, 0, 0)
+                          : new Date().setHours(18, 0, 0, 0) // Ustaw maksymalną godzinę dla dat w przyszłości
+                      }
                       timeCaption="Godzina"
                       dateFormat="Pp"
                       locale="pl"
                       placeholderText="Wybierz termin rozpoczęcia"
+                      minDate={new Date()}
+                      customInput={<CustomDatePickerInput />}
                     />
                   </div>
 
@@ -725,7 +751,10 @@ const CarDetailsForm = ({ car }) => {
                       popperPlacement=""
                       className="rent-datePicker"
                       id="endDatePicker"
-                      selected={endDate}
+                      selected={roundToNearestInterval(
+                        endDate || addDays(new Date(), 1),
+                        15
+                      )}
                       onChange={(date) => {
                         console.log("EndDate changed:", date);
                         setEndDate(date);
@@ -733,12 +762,18 @@ const CarDetailsForm = ({ car }) => {
                       showTimeSelect
                       timeFormat="HH:mm"
                       timeIntervals={15}
-                      minTime={new Date().setHours(6, 0, 0, 0)}
-                      maxTime={new Date().setHours(17, 0, 0, 0)}
+                      minTime={
+                        isToday(endDate)
+                          ? new Date().setMinutes(new Date().getMinutes() + 15) // Ustawienie minTime na obecną godzinę z zaokrągleniem do najbliższego kwartału godziny
+                          : new Date().setHours(6, 0, 0, 0) // Ustawienie minTime na północ (00:00) dla dat w przyszłości
+                      }
+                      maxTime={new Date().setHours(18, 0, 0, 0)}
                       timeCaption="Godzina"
                       dateFormat="Pp"
                       locale="pl"
                       placeholderText="Wybierz termin zakończenia"
+                      minDate={addDays(new Date(), 1)} // Ustawienie minDate na obecną datę + 2 dni
+                      customInput={<CustomDatePickerInput />}
                     />
                   </div>
                 </div>
@@ -844,26 +879,6 @@ const CarDetailsForm = ({ car }) => {
                 </div>
               </div>
             )}
-
-            {/* {currentStep === "paymentOptions" && (
-              <div className="options-selection">
-                <h2 className="centered">Wybierz opcję płatności</h2>
-                <div className="centered">
-                  <select
-                    value={selectedPaymentOption}
-                    onChange={handlePaymentOptionChange}
-                    className="payment-options-select"
-                  >
-                    <option value="">Wybierz opcję płatności</option>
-                    {paymentOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            )} */}
 
             {currentStep === "personalInformation" && (
               <div className="personal-info-form">

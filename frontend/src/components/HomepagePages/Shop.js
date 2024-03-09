@@ -173,7 +173,6 @@ const Shop = () => {
 
     const typeOptions = [...new Set(ids.map((carId) => entities[carId].type))];
     const brandOptions = [...new Set(ids.map((carId) => entities[carId].brand)),];
-    const gearboxTypeOptions = [...new Set(ids.map((carId) => entities[carId].gearboxType)),];
 
     const openModal = (imageUrl) => {
       setSelectedImage(imageUrl);
@@ -280,17 +279,6 @@ const Shop = () => {
                   </option>
                 ))}
               </select>
-              <select
-                value={searchBrand}
-                onChange={(e) => setSearchBrand(e.target.value)}
-              >
-                <option value="">Skrzynia biegów</option>
-                {gearboxTypeOptions.map((gearboxType, index) => (
-                  <option key={index} value={gearboxType}>
-                    {gearboxType}
-                  </option>
-                ))}
-              </select>
             </label>
             <button className="btn btn-primary" onClick={handleSearch}>
               Szukaj pojazdów
@@ -305,7 +293,7 @@ const Shop = () => {
             {/* Dodaj klasę przesunięcia */}
             <div className="row row-cols-1 row-cols-md-3 g-4">
               {applyFilters().map((carId) => (  // Użycie metody applyFilters}
-                <div key={carId} className="col mb-3">
+                <div key={carId} className="shop__car__card col mb-3">
                   <div className="card h-100 custom-card-shift">
                       {" "}
                       {/* Dodaj klasę przesunięcia */}

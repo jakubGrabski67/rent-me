@@ -80,7 +80,7 @@ import CheckoutSuccess from './CheckoutSuccess';
               <Route path=":id" element={<EditUser/>}/>
               <Route path="new" element={<NewUserForm/>}/>
             </Route>
-            </Route>
+           
 
             <Route path="notes">
               <Route index element={<NotesList />} />
@@ -117,7 +117,7 @@ import CheckoutSuccess from './CheckoutSuccess';
               <Route path="/dash/dashboard/homepageManagement" element={<DashboardHomepageManagement />} />
               <Route path="/dash/dashboard/documentation" element={<DashboardDocumentation />} />
             
-            
+              </Route>
 
             </Route>{/* End Dash */}
           </Route>

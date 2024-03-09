@@ -117,6 +117,7 @@ const DashboardServiceHistory = () => {
                 backgroundColor: "#f0f0f0", // Dodane tło
                 borderRadius: "8px", // Zaokrąglenie rogów
                 width: "55vh",
+                height: "66vh",
               }}
             >
               <Form.Group controlId="formCurrentlyInstalledTires">
@@ -132,9 +133,9 @@ const DashboardServiceHistory = () => {
                     })
                   }
                 >
-                  <option value="summer">Auto1</option>
-                  <option value="winter">Auto2</option>
-                  <option value="allSeason">Auto3</option>
+                  <option value="summer">BMW X5</option>
+                  <option value="winter">Mercedes W203</option>
+                  <option value="allSeason">AUDI S4</option>
                 </Form.Control>
               </Form.Group>
 
@@ -265,9 +266,9 @@ const DashboardServiceHistory = () => {
                     })
                   }
                 >
-                  <option value="summer">Auto1</option>
-                  <option value="winter">Auto2</option>
-                  <option value="allSeason">Auto3</option>
+                <option value="summer">BMW X5</option>
+                  <option value="winter">Mercedes W203</option>
+                  <option value="allSeason">AUDI S4</option>
                 </Form.Control>
               </Form.Group>
 
@@ -372,9 +373,9 @@ const DashboardServiceHistory = () => {
                     })
                   }
                 >
-                  <option value="summer">Auto1</option>
-                  <option value="winter">Auto2</option>
-                  <option value="allSeason">Auto3</option>
+                   <option value="summer">BMW X5</option>
+                  <option value="winter">Mercedes W203</option>
+                  <option value="allSeason">AUDI S4</option>
                 </Form.Control>
               </Form.Group>
 
@@ -460,9 +461,9 @@ const DashboardServiceHistory = () => {
                     })
                   }
                 >
-                  <option value="summer">Auto1</option>
-                  <option value="winter">Auto2</option>
-                  <option value="allSeason">Auto3</option>
+                   <option value="summer">BMW X5</option>
+                  <option value="winter">Mercedes W203</option>
+                  <option value="allSeason">AUDI S4</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId="formAdditionalInfo1">
@@ -544,9 +545,9 @@ const DashboardServiceHistory = () => {
                     })
                   }
                 >
-                  <option value="summer">Auto1</option>
-                  <option value="winter">Auto2</option>
-                  <option value="allSeason">Auto3</option>
+                <option value="summer">BMW X5</option>
+                  <option value="winter">Mercedes W203</option>
+                  <option value="allSeason">AUDI S4</option>
                 </Form.Control>
               </Form.Group>
               <div
@@ -636,9 +637,9 @@ const DashboardServiceHistory = () => {
                     })
                   }
                 >
-                  <option value="summer">Auto1</option>
-                  <option value="winter">Auto2</option>
-                  <option value="allSeason">Auto3</option>
+                  <option value="summer">BMW X5</option>
+                  <option value="winter">Mercedes W203</option>
+                  <option value="allSeason">AUDI S4</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId="formRepairs1">

@@ -14,11 +14,11 @@ const DashboardNavLinks = [
     icon: "ri-truck-line",
     display: "Zarządzanie flotą",
   },
-  {
-    path: "/dash/dashboard/customers",
-    icon: "ri-user-settings-line",
-    display: "Zarządzanie klientami",
-  },
+  // {
+  //   path: "/dash/dashboard/customers",
+  //   icon: "ri-user-settings-line",
+  //   display: "Zarządzanie klientami",
+  // },
   {
     path: "/dash/dashboard/reservations",
     icon: "ri-calendar-line",

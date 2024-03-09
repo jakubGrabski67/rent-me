@@ -39,11 +39,11 @@ const Login = () => {
             navigate('/dash')
         } catch (err) {
             if (!err.status) {
-                setErrMsg('No Server Response');
+                setErrMsg('Brak odpowiedzi ze strony serwera.');
             } else if (err.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setErrMsg('Brak nazwy użytkownika lub hasła.');
             } else if (err.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg('Brak autoryzacji.');
             } else {
                 setErrMsg(err.data?.message);
             }
@@ -62,7 +62,7 @@ const Login = () => {
     const content = (
         <section className="public">
             <header>
-                <h1>Logowanie do panelu pracownika</h1>
+                <h1 className="text-white">Logowanie do panelu pracownika</h1>
             </header>
             <main className="login">
                 <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>

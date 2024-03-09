@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./HomepageHeader.css";
 import { Row } from "reactstrap";
 import { motion } from "framer-motion";
-import logo from "../../assets/images/logo.jpg";
+import logo from "../../assets/images/logo.mp4";
 import { SocialIcon } from "react-social-icons";
 
 const whileTap = {
@@ -65,8 +65,11 @@ const HomepageHeader = () => {
             <div className={`bar ${mobileMenuOpen ? "active" : ""}`}></div>
             <div className={`bar ${mobileMenuOpen ? "active" : ""}`}></div>
           </div>
-          <div className="logo">
-            <img src={logo} alt="logo" />
+          <div className="logo-top">
+          <video width="200" height="70" autoPlay  muted>
+      <source src={logo} type="video/mp4" />
+      Twoja przeglądarka nie obsługuje tagu wideo.
+    </video>
           </div>
           
           <div className={`navigation ${mobileMenuOpen ? "active" : ""}`}>

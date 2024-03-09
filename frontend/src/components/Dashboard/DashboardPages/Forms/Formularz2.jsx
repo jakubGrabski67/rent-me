@@ -5,11 +5,25 @@ import "../../DashboardStyles/DashboardDocumentation.css";
 
 const Formularz2 = ({ formData, handleChange, handlePrint, goBack }) => {
 
-    const handleSaveAsPDF = () => {
-        const pdf = new jsPDF();
-        pdf.text('Treść Formularza 1', 10, 10); // Dodaj treść formularza do pliku PDF
-        pdf.save('Raport_o_stanie_pojazdu.pdf'); // Zapisz jako plik PDF o nazwie 'Formularz1.pdf'
-      };
+  const handlePrintForm2 = () => {
+    const form2Labels = {
+      client: 'Klient',
+      date: 'Data',
+      damage1: 'Uszkodzenie 1',
+      damage2: 'Uszkodzenie 2',
+      damage3: 'Uszkodzenie 3',
+      // Dodaj inne etykiety dla formularza 2
+    };
+
+    handlePrint('Raport o stanie pojazdu', form2Labels);
+  };
+
+  const handleSaveAsPDF = () => {
+    const pdf = new jsPDF();
+    pdf.text('Raport o stanie pojazdu', 10, 10); // Dodaj treść formularza do pliku PDF
+    pdf.save('Raport_o_stanie_pojazdu.pdf'); // Zapisz jako plik PDF o nazwie 'Formularz1.pdf'
+  };
+
   return (
     <Container className="rental-agreement-form">
       <h1 className="mt-5 h2-documentation">RAPORT O STANIE POJAZDU</h1>
@@ -85,8 +99,6 @@ const Formularz2 = ({ formData, handleChange, handlePrint, goBack }) => {
         </Col>
       </Form.Group>
 
-
-
       <h2 className="h2-documentation pt-3">Zdjęcia uszkodzeń:</h2>
       <Form.Group as={Row} className="mb-3 pt-3">
         <Form.Label column sm="4">
@@ -124,16 +136,16 @@ const Formularz2 = ({ formData, handleChange, handlePrint, goBack }) => {
         </Col>
       </Form.Group>
 
-<div className="pt-3">
-      <Button variant="primary" onClick={() => handlePrint('Treść Formularza 2')}>
-        Drukuj
-      </Button>
-      <Button variant="primary" onClick={handleSaveAsPDF}>
-        Zapisz plik jako PDF
-      </Button>
-      <Button variant="secondary" onClick={goBack}>
-        Wróć
-      </Button>
+      <div className="pt-3">
+        <Button variant="primary" onClick={handlePrintForm2}>
+          Drukuj
+        </Button>
+        <Button variant="primary" onClick={handleSaveAsPDF}>
+          Zapisz plik jako PDF
+        </Button>
+        <Button variant="secondary" onClick={goBack}>
+          Wróć
+        </Button>
       </div>
     </Container>
   );

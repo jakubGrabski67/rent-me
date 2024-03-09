@@ -65,6 +65,23 @@ const DashboardHomepage = () => {
   
     return 0; // Return a default value if reservations is not available.
   };
+
+  const countProcessingReservations = (reservations) => {
+    if (reservations) {
+      const { entities } = reservations;
+      let count = 0;
+  
+      for (const reservationId in entities) {
+        if (entities[reservationId].reservationStatus === "W trakcie") {
+          count++;
+        }
+      }
+  
+      return count;
+    }
+  
+    return 0; // Return a default value if reservations is not available.
+  };
   
 
   
@@ -81,9 +98,9 @@ const pendingReservationsAmount = {
   icon: "ri-steering-2-line",
 };
 
-const dailyVisitsAmount = {
+const processingReservationsAmount = {
   title: "Aktywne wypożyczenia",
-  totalNumber: 5,
+  totalNumber: countProcessingReservations(reservations),
   icon: "ri-user-line",
 };
 
@@ -105,7 +122,7 @@ const distanceObj = {
             <div className="dashboard__cards">
               <SingleCard item={carsAmount} />
               <SingleCard item={pendingReservationsAmount} />
-              <SingleCard item={dailyVisitsAmount} />
+              <SingleCard item={processingReservationsAmount} />
               <SingleCard item={distanceObj} />
             </div>
   
